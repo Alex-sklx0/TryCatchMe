@@ -1,0 +1,1456 @@
+fileFormatVersion: 2
+guid: 31c3a3b912f209d429af18066f8ec7b0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6793714847361749949
+    second: ramas_0
+  - first:
+      213: 2262613290559839065
+    second: ramas_1
+  - first:
+      213: 2457425407286756947
+    second: ramas_2
+  - first:
+      213: -2073249377224495443
+    second: ramas_3
+  - first:
+      213: -5441797252277702275
+    second: ramas_4
+  - first:
+      213: 2176118249094014329
+    second: ramas_5
+  - first:
+      213: -3588189536804079799
+    second: ramas_6
+  - first:
+      213: 1684503071033116822
+    second: ramas_7
+  - first:
+      213: -7343277792432875079
+    second: ramas_8
+  - first:
+      213: -6644199676263195540
+    second: ramas_9
+  - first:
+      213: -7972644646500277244
+    second: ramas_10
+  - first:
+      213: 3438106639026338996
+    second: ramas_11
+  - first:
+      213: 2592319687580617230
+    second: ramas_12
+  - first:
+      213: 7751646046783688537
+    second: ramas_13
+  - first:
+      213: 119063907290895971
+    second: ramas_14
+  - first:
+      213: -394466889286183675
+    second: ramas_15
+  - first:
+      213: 491484382754995517
+    second: ramas_16
+  - first:
+      213: -204844869593430150
+    second: ramas_17
+  - first:
+      213: 5708613287064318368
+    second: ramas_18
+  - first:
+      213: 8679280729419240902
+    second: ramas_19
+  - first:
+      213: -2413170711844373651
+    second: ramas_20
+  - first:
+      213: 2303404587446070225
+    second: ramas_21
+  - first:
+      213: -7790943926082210910
+    second: ramas_22
+  - first:
+      213: 7094720893110718834
+    second: ramas_23
+  - first:
+      213: -6190211162486252165
+    second: ramas_24
+  - first:
+      213: -4065813688019370242
+    second: ramas_25
+  - first:
+      213: 6077031589014843931
+    second: ramas_26
+  - first:
+      213: 5902290919552821626
+    second: ramas_27
+  - first:
+      213: -4591389298363365602
+    second: ramas_28
+  - first:
+      213: -6262616364097492523
+    second: ramas_29
+  - first:
+      213: -157864799026574891
+    second: ramas_30
+  - first:
+      213: -3465507303789545943
+    second: ramas_31
+  - first:
+      213: 3339900977537005831
+    second: ramas_32
+  - first:
+      213: 3577990537636363089
+    second: ramas_33
+  - first:
+      213: -8069094787743915388
+    second: ramas_34
+  - first:
+      213: -1952359432081414164
+    second: ramas_35
+  - first:
+      213: 2780534722100079139
+    second: ramas_36
+  - first:
+      213: 661004635912957073
+    second: ramas_37
+  - first:
+      213: -3392627239416158534
+    second: ramas_38
+  - first:
+      213: 9216484741748611395
+    second: ramas_39
+  - first:
+      213: -8189251162176925450
+    second: ramas_40
+  - first:
+      213: 728154565789425375
+    second: ramas_41
+  - first:
+      213: -5969046602395079271
+    second: ramas_42
+  - first:
+      213: -5745123585536967004
+    second: ramas_43
+  - first:
+      213: 4582892068600576722
+    second: ramas_44
+  - first:
+      213: -2480004376291397687
+    second: ramas_45
+  - first:
+      213: -9037801141492492737
+    second: ramas_46
+  - first:
+      213: -5792283571670514407
+    second: ramas_47
+  - first:
+      213: 5245987878798901578
+    second: ramas_48
+  - first:
+      213: 6968239006040495663
+    second: ramas_49
+  - first:
+      213: -7189034074324825460
+    second: ramas_50
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 4250
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ramas_0
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 1057
+        width: 28
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db35b46b8af184e50800000000000000
+      internalID: 6793714847361749949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_1
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 1032
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95b95e7ccca666f10800000000000000
+      internalID: 2262613290559839065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_2
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 1033
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 356c85f43678a1220800000000000000
+      internalID: 2457425407286756947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_3
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 1031
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daeebbb0da65a33e0800000000000000
+      internalID: -2073249377224495443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_4
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 1054
+        width: 30
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d717a4e1b3ada74b0800000000000000
+      internalID: -5441797252277702275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_5
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 1056
+        width: 27
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9756e7a9400233e10800000000000000
+      internalID: 2176118249094014329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_6
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 1055
+        width: 28
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 947f40890a0343ec0800000000000000
+      internalID: -3588189536804079799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_7
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 1033
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 698cbf34e9e806710800000000000000
+      internalID: 1684503071033116822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_8
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 987
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b9160f01cf671a90800000000000000
+      internalID: -7343277792432875079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_9
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 1009
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6c119fc89f0bc3a0800000000000000
+      internalID: -6644199676263195540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_10
+      rect:
+        serializedVersion: 2
+        x: 1136
+        y: 987
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4046ee45fe97b5190800000000000000
+      internalID: -7972644646500277244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_11
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 919
+        width: 29
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bcb317b5cb96bf20800000000000000
+      internalID: 3438106639026338996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_12
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 784
+        width: 94
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0a8e7a6505c9f320800000000000000
+      internalID: 2592319687580617230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_13
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 627
+        width: 411
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95f4a137201639b60800000000000000
+      internalID: 7751646046783688537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_14
+      rect:
+        serializedVersion: 2
+        x: 1226
+        y: 919
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 366d4ab2efff6a100800000000000000
+      internalID: 119063907290895971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_15
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 853
+        width: 26
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50591744472968af0800000000000000
+      internalID: -394466889286183675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_16
+      rect:
+        serializedVersion: 2
+        x: 1203
+        y: 853
+        width: 29
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3d73ce217a12d600800000000000000
+      internalID: 491484382754995517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_17
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 762
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7782d92dae382df0800000000000000
+      internalID: -204844869593430150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_18
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 783
+        width: 27
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a13b8ff981193f40800000000000000
+      internalID: 5708613287064318368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_19
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 719
+        width: 28
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c55deea6dff27870800000000000000
+      internalID: 8679280729419240902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_20
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 695
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6bb32ae502b28ed0800000000000000
+      internalID: -2413170711844373651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_21
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 559
+        width: 97
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1db6ab0b44657ff10800000000000000
+      internalID: 2303404587446070225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_22
+      rect:
+        serializedVersion: 2
+        x: 1113
+        y: 559
+        width: 97
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a3f1e407c101e390800000000000000
+      internalID: -7790943926082210910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_23
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 719
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27118661013857260800000000000000
+      internalID: 7094720893110718834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_24
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 402
+        width: 366
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7d595faeb3f71aa0800000000000000
+      internalID: -6190211162486252165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_25
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 582
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efe3faa0ef35397c0800000000000000
+      internalID: -4065813688019370242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_26
+      rect:
+        serializedVersion: 2
+        x: 1001
+        y: 492
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b12be006804f55450800000000000000
+      internalID: 6077031589014843931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_27
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 493
+        width: 29
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a79a5f4d15629e150800000000000000
+      internalID: 5902290919552821626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_28
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 470
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e17858562cb1840c0800000000000000
+      internalID: -4591389298363365602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_29
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 447
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d9ab6df897b619a0800000000000000
+      internalID: -6262616364097492523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_30
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 154
+        width: 231
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d98b7b3dc62fcdf0800000000000000
+      internalID: -157864799026574891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_31
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 335
+        width: 29
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9263a1fd77b08efc0800000000000000
+      internalID: -3465507303789545943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_32
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 359
+        width: 50
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 709b2175e36b95e20800000000000000
+      internalID: 3339900977537005831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_33
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 155
+        width: 96
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15b368ddf6397a130800000000000000
+      internalID: 3577990537636363089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_34
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 42
+        width: 186
+        height: 343
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 482619dda01d40090800000000000000
+      internalID: -8069094787743915388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_35
+      rect:
+        serializedVersion: 2
+        x: 1226
+        y: 359
+        width: 28
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce767e8c073d7e4e0800000000000000
+      internalID: -1952359432081414164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_36
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 222
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32a2a6c0991769620800000000000000
+      internalID: 2780534722100079139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_37
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 198
+        width: 74
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19c6a76d63c5c2900800000000000000
+      internalID: 661004635912957073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_38
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 245
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab6294b2087fae0d0800000000000000
+      internalID: -3392627239416158534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_39
+      rect:
+        serializedVersion: 2
+        x: 1226
+        y: 154
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 349dbb5aa0887ef70800000000000000
+      internalID: 9216484741748611395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_40
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 111
+        width: 30
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f05dfdd47fe95e80800000000000000
+      internalID: -8189251162176925450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_41
+      rect:
+        serializedVersion: 2
+        x: 1001
+        y: 86
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fde157b38bcea1a00800000000000000
+      internalID: 728154565789425375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_42
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 86
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99d2d709dbfa92da0800000000000000
+      internalID: -5969046602395079271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_43
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 64
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4aeb955b9883540b0800000000000000
+      internalID: -5745123585536967004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_44
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 42
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2da74e02e04b99f30800000000000000
+      internalID: 4582892068600576722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_45
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 42
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cfacbdc821459dd0800000000000000
+      internalID: -2480004376291397687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_46
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 42
+        width: 27
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3658b20fb7439280800000000000000
+      internalID: -9037801141492492737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_47
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 0
+        width: 30
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9158f38c7ccad9fa0800000000000000
+      internalID: -5792283571670514407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_48
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 21
+        width: 28
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4140db6e2e7dc840800000000000000
+      internalID: 5245987878798901578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_49
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 20
+        width: 30
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f269019e47824b060800000000000000
+      internalID: 6968239006040495663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_50
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 0
+        width: 30
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8a80b9399b6b3c90800000000000000
+      internalID: -7189034074324825460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ramas_0: 6793714847361749949
+      ramas_1: 2262613290559839065
+      ramas_10: -7972644646500277244
+      ramas_11: 3438106639026338996
+      ramas_12: 2592319687580617230
+      ramas_13: 7751646046783688537
+      ramas_14: 119063907290895971
+      ramas_15: -394466889286183675
+      ramas_16: 491484382754995517
+      ramas_17: -204844869593430150
+      ramas_18: 5708613287064318368
+      ramas_19: 8679280729419240902
+      ramas_2: 2457425407286756947
+      ramas_20: -2413170711844373651
+      ramas_21: 2303404587446070225
+      ramas_22: -7790943926082210910
+      ramas_23: 7094720893110718834
+      ramas_24: -6190211162486252165
+      ramas_25: -4065813688019370242
+      ramas_26: 6077031589014843931
+      ramas_27: 5902290919552821626
+      ramas_28: -4591389298363365602
+      ramas_29: -6262616364097492523
+      ramas_3: -2073249377224495443
+      ramas_30: -157864799026574891
+      ramas_31: -3465507303789545943
+      ramas_32: 3339900977537005831
+      ramas_33: 3577990537636363089
+      ramas_34: -8069094787743915388
+      ramas_35: -1952359432081414164
+      ramas_36: 2780534722100079139
+      ramas_37: 661004635912957073
+      ramas_38: -3392627239416158534
+      ramas_39: 9216484741748611395
+      ramas_4: -5441797252277702275
+      ramas_40: -8189251162176925450
+      ramas_41: 728154565789425375
+      ramas_42: -5969046602395079271
+      ramas_43: -5745123585536967004
+      ramas_44: 4582892068600576722
+      ramas_45: -2480004376291397687
+      ramas_46: -9037801141492492737
+      ramas_47: -5792283571670514407
+      ramas_48: 5245987878798901578
+      ramas_49: 6968239006040495663
+      ramas_5: 2176118249094014329
+      ramas_50: -7189034074324825460
+      ramas_6: -3588189536804079799
+      ramas_7: 1684503071033116822
+      ramas_8: -7343277792432875079
+      ramas_9: -6644199676263195540
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
