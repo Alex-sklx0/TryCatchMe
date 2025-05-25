@@ -14,6 +14,13 @@ public class CristianMovimiento : MonoBehaviour
     private bool _tocaSuelo;
     private float _ultimoDisparo;
     private int _salud = 5;
+    public int Salud
+    {
+        get
+        {
+            return _salud;
+        }
+    }
 
     private void Start()
     {

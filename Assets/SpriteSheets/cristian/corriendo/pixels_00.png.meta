@@ -113,15 +113,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pixels_00_0
+      name: corriendo0
       rect:
         serializedVersion: 2
-        x: 509
-        y: 103
-        width: 1020
-        height: 936
+        x: 616
+        y: 119
+        width: 661
+        height: 920
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f99e95722f93a1f4692c4c6a0fbf8ccf
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pixels_00_0: -145760222704183172
+      corriendo0: -145760222704183172
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

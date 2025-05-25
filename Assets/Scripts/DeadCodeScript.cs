@@ -3,67 +3,83 @@ using UnityEngine;
 public class DeadCodeScript : MonoBehaviour
 {
     public Transform cristian;
-    public float velocidad = 3f;
-    public float distanciaDetencion = 0.5f;
-    public float distanciaPersecucion = 10f;
+    public float velocidad;
+    public float distanciaAutodestruccion ; // Distancia para autodestruirse
+    public int danoPorAutodestruccion ; // Daño a Cristian
+    public AudioClip sonido;
+    public AudioClip sonidoExplosion;
     
-    private Rigidbody2D _rigidbody2D;
     private int _salud = 3;
+    private Rigidbody2D _rigidbody2D;
+    private Vector2 _direccionMovimiento;
 
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        if (sonido != null && Camera.main != null)
+        {
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(sonido);
+        }
     }
 
     void Update()
     {
         if (cristian == null) return;
 
-        Vector3 direccion = cristian.position - transform.position;
-        float distancia = direccion.magnitude;
-
+        Vector2 direccion = cristian.position - transform.position;
+        
         // Flip sprite
         transform.localScale = new Vector3(
             direccion.x >= 0 ? 1f : -1f, 
             1f, 
-            1f);
+            1f
+        );
 
-        // Debug para diagnóstico
-        Debug.Log($"Movimiento: {_rigidbody2D.linearVelocity} | Distancia: {distancia} | DentroRango: {distancia < distanciaPersecucion && distancia > distanciaDetencion}");
+        _direccionMovimiento = direccion.normalized;
+
+        // Verificar distancia para autodestrucción
+        if (direccion.magnitude <= distanciaAutodestruccion)
+        {
+            Autodestruir();
+        }
     }
 
     void FixedUpdate()
     {
         if (cristian == null) return;
+        _rigidbody2D.linearVelocity = _direccionMovimiento * velocidad;
+    }
 
-        Vector3 direccion = cristian.position - transform.position;
-        float distancia = direccion.magnitude;
+    void Autodestruir()
+    {
+        // Aplicar daño a Cristian
+        CristianMovimiento cristianScript = cristian.GetComponent<CristianMovimiento>();
+        if (cristianScript != null)
+        {
+            for (int i = 0; i < danoPorAutodestruccion; i++)
+            {
+                cristianScript.Golpe();
+            }
+        }
 
-        if (distancia < distanciaPersecucion && distancia > distanciaDetencion)
+        // Sonido de explosión
+        if (sonidoExplosion != null && Camera.main != null)
         {
-            Vector2 movimiento = new Vector2(
-                Mathf.Sign(direccion.x) * velocidad,
-                _rigidbody2D.linearVelocity.y);
-            
-            _rigidbody2D.linearVelocity = movimiento;
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(sonidoExplosion);
         }
-        else
-        {
-            _rigidbody2D.linearVelocity = new Vector2(0f, _rigidbody2D.linearVelocity.y);
-        }
+
+        // Efecto visual opcional (si quieres agregar una explosión)
+        // Instantiate(explosionEffect, transform.position, Quaternion.identity);
+
+        Destroy(gameObject);
     }
 
     public void Golpe()
     {
         _salud -= 1;
-        if (_salud == 0) Destroy(gameObject);
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, distanciaPersecucion);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, distanciaDetencion);
+        if (_salud <= 0) 
+        {
+            Destroy(gameObject);
+        }
     }
 }
