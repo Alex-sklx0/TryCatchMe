@@ -1,7 +1,10 @@
 fileFormatVersion: 2
-guid: 424da7d035c678e489abfa9748a5cc72
+guid: c24b590f6ee12be45b5c5b74b4acabc9
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -8807455093422830999
+    second: bloques_oscuros_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -34,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 102
+  spritePixelsToUnits: 4380
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -65,7 +68,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
@@ -110,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: disparo_GetterGoblin_0
+      name: bloques_oscuros_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 8
-        height: 8
+        x: 741
+        y: 589
+        width: 438
+        height: 440
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,20 +128,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e5dfcc2067475f45bbb6a199c310001
-      internalID: 527748984
+      spriteID: 6594d1442c21e6f409319a62eb45f618
+      internalID: -543525134
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: disparo_GetterGoblin_1
+      name: bloques_oscuros_2
       rect:
         serializedVersion: 2
-        x: 8
-        y: 0
-        width: 8
-        height: 8
+        x: 1375
+        y: 589
+        width: 438
+        height: 440
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a96f9c48222d554d8567e1999cf14f6
-      internalID: -911488304
+      spriteID: 0a34d2f42826933459d5f38245c2769b
+      internalID: 881354807
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: disparo_GetterGoblin_2
+      name: bloques_oscuros_3
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
-        width: 8
-        height: 8
+        x: 108
+        y: 27
+        width: 438
+        height: 440
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b45791baeebe7f143bc0daeb80f3c9da
-      internalID: 914016910
+      spriteID: 300825272702e4646b3e22272b756f13
+      internalID: 1005086857
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: disparo_GetterGoblin_3
+      name: bloques_oscuros_4
       rect:
         serializedVersion: 2
-        x: 24
-        y: 0
-        width: 8
-        height: 8
+        x: 741
+        y: 27
+        width: 438
+        height: 440
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,20 +194,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 846ee0d968ae7104cb5b3d120498d714
-      internalID: 972172450
+      spriteID: 86dbb3b29ca4a5f4490c9d4da3d05e27
+      internalID: 144427135
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: disparo_GetterGoblin_4
+      name: bloques_oscuros_5
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 8
-        height: 8
+        x: 1375
+        y: 27
+        width: 438
+        height: 440
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +216,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00093e8eca25d1c46967e9a089b136d0
-      internalID: 1130066106
+      spriteID: b01fd9ed1a790cb41b801253716a3d5d
+      internalID: 1933268908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: disparo_GetterGoblin_5
+      name: bloques_oscuros_0
       rect:
         serializedVersion: 2
-        x: 40
-        y: 0
-        width: 8
-        height: 8
+        x: 108
+        y: 589
+        width: 438
+        height: 440
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,30 +238,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: afb7607079c6023419ae5bdef41fcb68
-      internalID: 807068799
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: disparo_GetterGoblin_6
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6e8803baaa4e2ac499a32143b9ba62cf
-      internalID: 1478400978
+      spriteID: b4436a691e9661b4a9de02c1e81933f4
+      internalID: 219668818
       vertices: []
       indices: 
       edges: []
@@ -267,7 +248,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: fd4e1d11573f5f648bb13950ec91f746
     internalID: 0
     vertices: []
     indices: 
@@ -277,15 +258,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":8.0,"y":8.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":1,"spriteAlignment":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      disparo_GetterGoblin_0: 527748984
-      disparo_GetterGoblin_1: -911488304
-      disparo_GetterGoblin_2: 914016910
-      disparo_GetterGoblin_3: 972172450
-      disparo_GetterGoblin_4: 1130066106
-      disparo_GetterGoblin_5: 807068799
-      disparo_GetterGoblin_6: 1478400978
+      bloques_oscuros_0: 219668818
+      bloques_oscuros_1: -543525134
+      bloques_oscuros_2: 881354807
+      bloques_oscuros_3: 1005086857
+      bloques_oscuros_4: 144427135
+      bloques_oscuros_5: 1933268908
+      bloques_oscuros_6: -878833835
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
