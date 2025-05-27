@@ -11,6 +11,9 @@ private float _velocidadBase;
     public GameObject disparoPrefab;
     private SpriteRenderer _spriteRenderer;
     private bool _disparosBloqueados = false;
+    private bool _stuneado = false;
+    private int _saltosNecesarios = 0;
+    private int _saltosRealizados = 0;
 
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
@@ -36,50 +39,102 @@ private float _velocidadBase;
     }
 
     private void Update()
+{
+    // Movimiento
+    _horizontal = Input.GetAxisRaw("Horizontal");
+
+    // Rotación del sprite
+    if (_horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+    else if (_horizontal > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+    // Animación de correr
+    _animator.SetBool("corriendo", _horizontal != 0.0f);
+
+    // Detección de suelo
+    Debug.DrawRay(transform.position, Vector3.down * 0.12f, Color.red);
+    _tocaSuelo = Physics2D.Raycast(transform.position, Vector3.down, 0.12f);
+
+    // Salto normal
+    if (Input.GetKeyDown(KeyCode.W) && _tocaSuelo)
     {
-
-        // Movimiento
-        _horizontal = Input.GetAxisRaw("Horizontal");
-
-        //para que cristian gire el sprite hacia atras cuando se teclee "a"
-        if (_horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-        else if (_horizontal > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
-        // para saber si hay que hacer animacion de correr o no
-        _animator.SetBool("corriendo", _horizontal != 0.0f);
-
-        // Detectar Suelo
-        Debug.DrawRay(transform.position, Vector3.down * 0.12f, Color.red);
-        if (Physics2D.Raycast(transform.position, Vector3.down, 0.12f))
+        Salto();
+        
+        // Contar saltos solo si está stuneado
+        if (_stuneado)
         {
-            _tocaSuelo = true;
-        }
-        else _tocaSuelo = false;
-
-        // Salto
-        if (Input.GetKeyDown(KeyCode.W) && _tocaSuelo)
-        {
-            Salto();
-        }
-
-        // Disparar
-        if (Input.GetKey(KeyCode.Space) && Time.time > _ultimoDisparo + 0.25f)
-        {
-            Disparo();
-            _ultimoDisparo = Time.time;
+            _saltosRealizados++;
+            Debug.Log($"Saltos realizados: {_saltosRealizados}/{_saltosNecesarios}");
         }
     }
 
+    // Disparo (solo si no está bloqueado)
+    if (Input.GetKey(KeyCode.Space) && Time.time > _ultimoDisparo + 0.25f && !_disparosBloqueados)
+    {
+        Disparo();
+        _ultimoDisparo = Time.time;
+    }
+}
     private void FixedUpdate()
     {
-        _rigidbody2D.linearVelocity = new Vector2(_horizontal * velocidad, _rigidbody2D.linearVelocity.y);
+if (_stuneado)
+{
+    // El jugador no puede moverse lateralmente mientras esté stuneado
+    _rigidbody2D.linearVelocity = new Vector2(0f, _rigidbody2D.linearVelocity.y);
+}
+else
+{
+    _rigidbody2D.linearVelocity = new Vector2(_horizontal * velocidad, _rigidbody2D.linearVelocity.y);
+}
     }
+     public void AplicarStun()
+{
+    if (!_stuneado)
+    {
+        _stuneado = true;
+        _saltosNecesarios = 3;
+        _saltosRealizados = 0;
+        StartCoroutine(StunCoroutine());
+        
+        // Feedback adicional
+        Debug.Log("¡Estás aturdido! Salta 3 veces para liberarte");
+    }
+}
+    
+   IEnumerator StunCoroutine()
+{
+    // Guardar estado original
+    bool podiaDisparar = !_disparosBloqueados;
+    
+    // Aplicar stun (bloquear disparos)
+    _disparosBloqueados = true;
+    
+    // Efecto visual
+    SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+    Color originalColor = renderer.color;
+    renderer.color = Color.yellow;
+    
+    // Esperar a que el jugador salte 3 veces
+    while (_saltosRealizados < _saltosNecesarios)
+    {
+        yield return null;
+    }
+    
+    // Restaurar estado
+    _stuneado = false;
+    _disparosBloqueados = !podiaDisparar; // Restaurar estado original de los disparos
+    renderer.color = originalColor;
+    
+    // Resetear contador de saltos
+    _saltosRealizados = 0;
+    _saltosNecesarios = 0;
+}
+    
    
      public void AplicarRalentizacion(float factor, float duracion)
     {
         // Detener ralentización existente
         StopAllCoroutines();
-        
+
         // Aplicar nueva ralentización
         StartCoroutine(EfectoRalentizacion(factor, duracion));
     }

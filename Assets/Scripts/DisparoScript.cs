@@ -41,6 +41,7 @@ public class DisparoScript : MonoBehaviour
         DeadCodeScript deadCodeScript = other.GetComponent<DeadCodeScript>();
         GetterGoblinScript getterGoblin = other.GetComponent<GetterGoblinScript>();
         NullieScript nullie = other.GetComponent<NullieScript>();
+        SpaghettiCodeBoss spaghettiCodeBoss = other.GetComponent<SpaghettiCodeBoss>();
         if (getterGoblin != null)
         {
             getterGoblin.Golpe();
@@ -53,7 +54,10 @@ public class DisparoScript : MonoBehaviour
         {
             nullie.Golpe();
         }
-       
+       if (spaghettiCodeBoss != null)
+        {
+            spaghettiCodeBoss.Golpe();
+        }
         DestruirDisparo();
     }
 }
