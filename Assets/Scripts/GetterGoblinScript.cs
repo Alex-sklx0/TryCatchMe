@@ -31,7 +31,7 @@ public class GetterGoblinScript : MonoBehaviour
     {
         Vector3 direccion = new Vector3(transform.localScale.x, 0.0f, 0.0f);
         GameObject disparo = Instantiate(disparoPrefab, transform.position + direccion * 0.12f, Quaternion.identity);
-        disparo.GetComponent<DisparoGetterGoblinScript>().Direccion=direccion;
+        disparo.GetComponent<DisparoGetterGoblinScript>().Direccion = direccion;
     }
 
     public void Golpe()
@@ -39,4 +39,5 @@ public class GetterGoblinScript : MonoBehaviour
         _salud -= 1;
         if (_salud == 0) Destroy(gameObject);
     }
+    
 }

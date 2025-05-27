@@ -6,7 +6,7 @@ public class EspaguetiScript : MonoBehaviour
     public float duracion ;
     public float velocidadCrecimiento ;
     public float longitudMaxima ;
-
+    private float _dano = 1f;
     private float _tiempo;
     private BoxCollider2D _collider;
     private SpriteRenderer _spriteRenderer;
@@ -59,7 +59,7 @@ public class EspaguetiScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<CristianMovimiento>()?.Golpe();
+            other.GetComponent<CristianMovimiento>()?.Golpe(_dano);
         }
     }
 }

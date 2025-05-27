@@ -24,6 +24,7 @@ public class NullieScript : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private CristianMovimiento _cristianScript;
     private SpriteRenderer _spriteRenderer;
+    private float dano = 1f;
     private int _salud = 5;
     private float _ultimoDaño;
     private float _ultimoBloqueo;
@@ -77,7 +78,7 @@ public class NullieScript : MonoBehaviour
     {
         if (Time.time - _ultimoDaño >= cooldownDaño)
         {
-            _cristianScript.Golpe();
+            _cristianScript.Golpe(dano);
             _ultimoDaño = Time.time;
             
             _spriteRenderer.color = Color.red;

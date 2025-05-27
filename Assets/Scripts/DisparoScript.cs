@@ -42,6 +42,10 @@ public class DisparoScript : MonoBehaviour
         GetterGoblinScript getterGoblin = other.GetComponent<GetterGoblinScript>();
         NullieScript nullie = other.GetComponent<NullieScript>();
         SpaghettiCodeBoss spaghettiCodeBoss = other.GetComponent<SpaghettiCodeBoss>();
+
+        OverengineeringScript overengineering = other.GetComponent<OverengineeringScript>();
+        UnderengineeringScript underengineering = other.GetComponent <UnderengineeringScript>();
+        InheritrixScript inheritrix = other.GetComponent<InheritrixScript>();
         if (getterGoblin != null)
         {
             getterGoblin.Golpe();
@@ -58,6 +62,19 @@ public class DisparoScript : MonoBehaviour
         {
             spaghettiCodeBoss.Golpe();
         }
+        if (overengineering != null)
+        {
+            overengineering .Golpe();
+        }
+        if (underengineering != null)
+        {
+            underengineering .Golpe();
+        }
+        if (inheritrix != null)
+        {
+            inheritrix.Golpe();
+        }
+
         DestruirDisparo();
     }
 }

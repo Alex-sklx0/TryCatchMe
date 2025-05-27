@@ -5,7 +5,7 @@
         [Header("Configuración")]
         public float fuerza ;
         public float tiempoVida;
-
+        private float _dano;
         private Rigidbody2D _rb;
         private SpriteRenderer _spriteRenderer;
 
@@ -33,7 +33,7 @@
         {
             if (other.CompareTag("Player"))
             {
-                other.GetComponent<CristianMovimiento>()?.Golpe();
+                other.GetComponent<CristianMovimiento>()?.Golpe(_dano);
                 Destroy(gameObject);
             }
             else if (other.CompareTag("Ground"))

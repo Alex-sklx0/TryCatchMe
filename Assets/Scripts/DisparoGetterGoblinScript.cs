@@ -6,7 +6,7 @@ public class DisparoGetterGoblinScript : MonoBehaviour
 {
     public float velocidad;
     public AudioClip sonido;
-
+    private float _dano = 1f;
     private Rigidbody2D _rigidbody2D;
     private Vector3 _direccion;
     public Vector3 Direccion
@@ -42,7 +42,7 @@ public class DisparoGetterGoblinScript : MonoBehaviour
         
         if (cristian != null)
         {
-            cristian.Golpe();
+            cristian.Golpe(_dano);
         }
         DestruirDisparo();
     }

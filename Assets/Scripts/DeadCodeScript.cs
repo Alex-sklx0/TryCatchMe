@@ -11,7 +11,7 @@ public class DeadCodeScript : MonoBehaviour
     private const float _duracionRalentizacion = 3f; // Tiempo en segundos
     public AudioClip sonido;
     public AudioClip sonidoExplosion;
-    
+    private float _dano = 1f;
     private int _salud = 3;
     private Rigidbody2D _rigidbody2D;
     private Vector2 _direccionMovimiento;
@@ -75,7 +75,7 @@ public class DeadCodeScript : MonoBehaviour
         {
             for (int i = 0; i < danoPorAutodestruccion; i++)
             {
-                cristianScript.Golpe();
+                cristianScript.Golpe(_dano);
             }
         }
 

@@ -20,8 +20,8 @@ private float _velocidadBase;
     private float _horizontal;
     private bool _tocaSuelo;
     private float _ultimoDisparo;
-    private int _salud = 5;
-    public int Salud
+    private float _salud = 5;
+    public float Salud
     {
         get
         {
@@ -182,9 +182,9 @@ else
         disparo.GetComponent<DisparoScript>().Direccion = direccion;
     }
 
-    public void Golpe()
+    public void Golpe(float dano)
     {
-        _salud -= 1;
-        if (_salud == 0) Destroy(gameObject);
+        _salud =_salud- dano;
+        if (_salud <= 0) Destroy(gameObject);
     }
 }
