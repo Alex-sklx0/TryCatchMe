@@ -229,6 +229,7 @@ MonoBehaviour:
   velocidad: 0.8
   fuerzaSalto: 130
   disparoPrefab: {fileID: 3450159402256386244, guid: 21e83925e371c4349acfb682eee6dfe8, type: 3}
+  cooldownDisparo: 0.5
 --- !u!50 &76953969
 Rigidbody2D:
   serializedVersion: 5
@@ -1270,6 +1271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cristian: {fileID: 76953965}
+  velocidadCamara: 0.025
+  desplazamiento: {x: 0, y: 0, z: -10}
 --- !u!81 &707396745
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1996,7 +1999,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -3326774967109012380, guid: 79fc1be942f4f3844ae764e1c42f8dff, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.82641506, g: 0.740655, b: 0.740655, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2036,8 +2039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c86ed2427dc864ab50896bf050e47e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiempoEntreAtaques: 2
-  radioDeteccion: 1.8
+  jugador: {fileID: 0}
   puntoAtaqueAlto: {fileID: 856042023}
   puntoAtaqueMedio: {fileID: 728306073}
   puntoAtaqueBajo: {fileID: 773758089}

@@ -33,11 +33,14 @@ public class DisparoScript : MonoBehaviour
 
     public void DestruirDisparo()
     {
+        
         Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
+
         DeadCodeScript deadCodeScript = other.GetComponent<DeadCodeScript>();
         GetterGoblinScript getterGoblin = other.GetComponent<GetterGoblinScript>();
         NullieScript nullie = other.GetComponent<NullieScript>();
@@ -46,6 +49,15 @@ public class DisparoScript : MonoBehaviour
         OverengineeringScript overengineering = other.GetComponent<OverengineeringScript>();
         UnderengineeringScript underengineering = other.GetComponent <UnderengineeringScript>();
         InheritrixScript inheritrix = other.GetComponent<InheritrixScript>();
+        GodObjectScript godObject = other.GetComponent<GodObjectScript>();
+            if (other.CompareTag("Player")) return; // <-- Ignora al jugador
+         if (other.CompareTag("Disparo"))
+        {
+            Destroy(gameObject);           // Destruye este disparo
+            Destroy(other.gameObject);     // Destruye el otro disparo también (si quieres)
+            return;                        // Sal del método para no seguir golpeando enemigos
+        }
+
         if (getterGoblin != null)
         {
             getterGoblin.Golpe();
@@ -73,6 +85,10 @@ public class DisparoScript : MonoBehaviour
         if (inheritrix != null)
         {
             inheritrix.Golpe();
+        }
+        if (godObject != null)
+        {
+            godObject.Golpe();
         }
 
         DestruirDisparo();

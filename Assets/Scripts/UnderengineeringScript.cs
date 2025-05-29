@@ -3,11 +3,10 @@ using UnityEngine;
 public class UnderengineeringScript : MonoBehaviour
 {
     public float velocidad ;
-    public float vidaMaxima;
     public float radioAtaque;
     public float tiempoEntreAtaques = 2f;
     private float dano = 1f;
-    private float _salud;
+    private float _salud = 4;
     private float tiempoAtaqueActual = 0f;
     private Transform objetivo;
     private Rigidbody2D rb;

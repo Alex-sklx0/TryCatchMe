@@ -11,6 +11,10 @@ private float _velocidadBase;
     public GameObject disparoPrefab;
     private SpriteRenderer _spriteRenderer;
     private bool _disparosBloqueados = false;
+private float tiempoUltimoDisparo;
+public float cooldownDisparo = 0.5f; // puedes ajustar este valor
+
+
     private bool _stuneado = false;
     private int _saltosNecesarios = 0;
     private int _saltosRealizados = 0;
@@ -173,14 +177,19 @@ else
     }
 
     private void Disparo()
-    {
-        if (_disparosBloqueados) return;
-        
-        // Resto del código de disparo original
-        Vector3 direccion = transform.localScale.x == 1.0f ? Vector3.right : Vector3.left;
-        GameObject disparo = Instantiate(disparoPrefab, transform.position + direccion * 0.12f, Quaternion.identity);
-        disparo.GetComponent<DisparoScript>().Direccion = direccion;
-    }
+{
+    if (_disparosBloqueados) return;
+
+    if (Time.time < tiempoUltimoDisparo + cooldownDisparo) return; // <-- Este es el cooldown
+
+    // Resto del código de disparo
+    Vector3 direccion = transform.localScale.x == 1.0f ? Vector3.right : Vector3.left;
+    GameObject disparo = Instantiate(disparoPrefab, transform.position + direccion * 0.12f, Quaternion.identity);
+    disparo.GetComponent<DisparoScript>().Direccion = direccion;
+
+    tiempoUltimoDisparo = Time.time; // <-- Actualizamos el tiempo del último disparo
+}
+
 
     public void Golpe(float dano)
     {
