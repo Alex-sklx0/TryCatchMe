@@ -7,7 +7,6 @@ public class InheritrixScript : MonoBehaviour
 public GameObject disparoPrefab;         // Bala normal
 public GameObject disparoHieloPrefab;    // Bala de hielo
 public GameObject disparoFuegoPrefab;    // Bala de fuego
-    private int contadorDisparos = 0;
     public Transform cristian;
 
     private int _salud = 3;
@@ -59,7 +58,7 @@ private void Disparo()
 
     public void Golpe()
     {
-        _salud -= 1;
-        if (_salud == 0) Destroy(gameObject);
+        _salud --;
+        if (_salud <= 0) Destroy(gameObject);
     }
 }

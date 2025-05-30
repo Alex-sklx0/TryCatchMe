@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: af87f82904317d1469bc0415a134c014
+guid: f5e18ba8ef6a34a4da5a04ebc24cc332
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4508709743979979279
-    second: Rojos_0
+      213: 2723818110961645573
+    second: barraFondo_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rojos_0
+      name: barraFondo_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 233
-        width: 520
-        height: 86
+        x: 24
+        y: 177
+        width: 481
+        height: 129
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1fd1bb24068dd61c0800000000000000
-      internalID: -4508709743979979279
+      spriteID: 508f4a8f322fcc520800000000000000
+      internalID: 2723818110961645573
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e1965e462f3894e40beec54151318d6d
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -146,15 +146,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":1,"spriteAlignment":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
-    nameFileIdTable:
-      Rojos_0: -4508709743979979279
-      Rojos_1: 1711674529
-      Rojos_2: 1801103427
-      Rojos_3: 375817930
-      Rojos_4: -1486693233
+      entries: []
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

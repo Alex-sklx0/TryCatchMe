@@ -18,8 +18,11 @@ public class LogicTrapScript : MonoBehaviour
 
     private void Update()
     {
-    
+            if (cristian == null) return;
 
+Vector2 direccion = (cristian.position - transform.position).normalized;
+        if (direccion.x >= 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        else transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
         // Verificar distancia y tiempo para atacar
         if (Vector2.Distance(transform.position, cristian.position) <= _rangoDeteccion &&
             Time.time >= _tiempoUltimoAtaque + tiempoEntreAtaques)

@@ -27,10 +27,9 @@ public class DisparoHieloScript : MonoBehaviour
 
         Destroy(gameObject);
     }
-    else if (!collision.isTrigger)
-    {
+    
         Destroy(gameObject);
-    }
+    
 }
 
 }

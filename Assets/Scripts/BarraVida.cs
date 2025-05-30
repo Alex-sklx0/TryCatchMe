@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BarraVida : MonoBehaviour
+public class BarraVidaScript : MonoBehaviour
 {
     [SerializeField] private Image rellenoBarraVida; // Usamos SerializeField para mejor depuración
     private CristianMovimiento cristianMovimiento;
     private float vidaMaxima;
+    private bool corazonesOcultos = false;
+
 
     void Start()
     {
@@ -43,15 +45,39 @@ public class BarraVida : MonoBehaviour
     {
         // Actualizar cada frame (o podrías usar eventos)
         ActualizarBarraVida();
+        if (cristianMovimiento == null && !corazonesOcultos)
+{
+    rellenoBarraVida.gameObject.SetActive(false);
+    corazonesOcultos = true;
+}
+
     }
 
     void ActualizarBarraVida()
     {
-        // Verificar todas las referencias antes de usarlas
         if (rellenoBarraVida != null && cristianMovimiento != null)
         {
             float saludActual = cristianMovimiento.Salud;
-            rellenoBarraVida.fillAmount = Mathf.Clamp01(saludActual / vidaMaxima);
+
+            if (saludActual <= 0 && !corazonesOcultos)
+            {
+                rellenoBarraVida.gameObject.SetActive(false); // Ocultar corazón
+                corazonesOcultos = true;
+            }
+            else if (saludActual > 0 && corazonesOcultos)
+            {
+                rellenoBarraVida.gameObject.SetActive(true); // Por si revive
+                corazonesOcultos = false;
+            }
+
+            if (saludActual > 0)
+            {
+                rellenoBarraVida.fillAmount = Mathf.Clamp01(saludActual / vidaMaxima);
+            }
+
         }
-    }
+    
+}
+
+
 }
