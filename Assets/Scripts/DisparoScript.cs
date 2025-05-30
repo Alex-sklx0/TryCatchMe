@@ -50,6 +50,10 @@ public class DisparoScript : MonoBehaviour
         UnderengineeringScript underengineering = other.GetComponent <UnderengineeringScript>();
         InheritrixScript inheritrix = other.GetComponent<InheritrixScript>();
         GodObjectScript godObject = other.GetComponent<GodObjectScript>();
+
+        LogicTrapScript logicTrap = other.GetComponent<LogicTrapScript>();
+        RecurseScript recurse = other.GetComponent<RecurseScript>();
+        LambdazapScript lambdazap = other.GetComponent<LambdazapScript>();
             if (other.CompareTag("Player")) return; // <-- Ignora al jugador
          if (other.CompareTag("Disparo"))
         {
@@ -90,7 +94,18 @@ public class DisparoScript : MonoBehaviour
         {
             godObject.Golpe();
         }
-
+         if (logicTrap != null)
+        {
+            logicTrap.Golpe();
+        }
+        if (recurse != null)
+        {
+            recurse.Golpe();
+        }
+        if (lambdazap != null)
+        {
+            lambdazap.Golpe();
+        }
         DestruirDisparo();
     }
 }

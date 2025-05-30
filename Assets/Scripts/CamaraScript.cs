@@ -5,7 +5,7 @@ using UnityEngine;
 public class CamaraController : MonoBehaviour
 {
     public Transform cristian;
-    public float velocidadCamara = 0.025f;
+    private const float velocidadCamara = 0.025f;
 
     // Ajusta este valor para que la cámara esté más arriba del jugador
     public Vector3 desplazamiento = new Vector3();
@@ -14,10 +14,10 @@ public class CamaraController : MonoBehaviour
     {
         if (cristian == null) return;
 
-        // Calcula la posición deseada con el desplazamiento
+        // Calcula la posición deseada con el desplazamiento del personaje
         Vector3 posicionDeseada = cristian.position + desplazamiento;
 
-        // Forzar siempre el eje Z a -10 para cámara 2D
+        // forzar siempre el eje Z a -10 para que la camara capte todo el plano
         posicionDeseada.z = -10f;
 
         // Suavizar el movimiento de la cámara
