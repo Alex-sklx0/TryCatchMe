@@ -20,7 +20,7 @@ public class GetterGoblinScript : MonoBehaviour
 
         float distancia = Mathf.Abs(cristian.position.x - transform.position.x);
 
-        if (distancia < 1.0f && Time.time > _ultimoTiro + 2f) //*!Error al disparar
+        if (distancia < 1.0f && Time.time > _ultimoTiro + 1.25f) //*!Error al disparar
         {
             Disparo();
             _ultimoTiro = Time.time;

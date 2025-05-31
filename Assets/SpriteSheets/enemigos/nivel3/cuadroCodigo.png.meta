@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d8333aaccae85a44cad1ac0709359a0c
+guid: a4f1a743d06a8b646a84f82747c6399b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4722618162733221791
-    second: crashtian_0
+      213: 3531170704709678408
+    second: cuadroCodigo_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 2000
+  spritePixelsToUnits: 3000
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crashtian_0
+      name: cuadroCodigo_0
       rect:
         serializedVersion: 2
-        x: 121
-        y: 51
-        width: 292
-        height: 386
+        x: 104
+        y: 142
+        width: 312
+        height: 236
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f97858f823c1a8140800000000000000
-      internalID: 4722618162733221791
+      spriteID: 8457c770c0d310130800000000000000
+      internalID: 3531170704709678408
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      crashtian_0: 4722618162733221791
+      cuadroCodigo_0: 3531170704709678408
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

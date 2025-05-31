@@ -54,6 +54,8 @@ public class DisparoScript : MonoBehaviour
         LogicTrapScript logicTrap = other.GetComponent<LogicTrapScript>();
         RecurseScript recurse = other.GetComponent<RecurseScript>();
         LambdazapScript lambdazap = other.GetComponent<LambdazapScript>();
+        CrashtianScript crashtian = other.GetComponent<CrashtianScript>();
+
             if (other.CompareTag("Player")) return; // <-- Ignora al jugador
          if (other.CompareTag("Disparo"))
         {
@@ -102,9 +104,9 @@ public class DisparoScript : MonoBehaviour
         {
             recurse.Golpe();
         }
-        if (lambdazap != null)
+        if (crashtian != null)
         {
-            lambdazap.Golpe();
+            crashtian.Golpe();
         }
         DestruirDisparo();
     }

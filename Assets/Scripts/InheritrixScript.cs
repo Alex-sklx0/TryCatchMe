@@ -22,7 +22,7 @@ public GameObject disparoFuegoPrefab;    // Bala de fuego
 
         float distancia = Mathf.Abs(cristian.position.x - transform.position.x);
 
-        if (distancia < 1.0f && Time.time > _ultimoTiro + 1.5f) //*!Error al disparar
+        if (distancia < 1.0f && Time.time > _ultimoTiro + 1.25f) //*!Error al disparar
         {
             Disparo();
             _ultimoTiro = Time.time;
