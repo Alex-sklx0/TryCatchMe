@@ -4,25 +4,37 @@ using UnityEngine;
 
 public class CristianMovimiento : MonoBehaviour
 {
-    public float velocidad;
+    //constantes
+    private const float cooldownDisparo = 0.5f;
+    private const float distanciaRaycast = 0.12f;
+    private const float _constanteGiroSprite = 1f; //constante para cuando se gira el srite en direccion y,z
+    private const int _saludMin = 0;
+
+    //serialized y variables publicas
+    [SerializeField] private GameObject _disparoPrefab;
+[SerializeField]private Animator _animator;
+
+    //variables privadas
+    private float _horizontal;
+    private float _velocidad = 0.8f;
     private float _velocidadBase;
-    private Coroutine _corutinaRalentizacion;
-    public float fuerzaSalto;
+
+    private float _fuerzaSalto = 130f;
+
     private bool _saltoBloqueado = false;
-    public GameObject disparoPrefab;
-    public SpriteRenderer spriteRenderer;
-    private bool _disparosBloqueados = false;
-    private float tiempoUltimoDisparo;
-    public float cooldownDisparo = 0.5f;
-    private bool _stuneado = false;
     private int _saltosNecesarios = 0;
     private int _saltosRealizados = 0;
 
+    private SpriteRenderer _spriteRenderer;
+    private bool _disparosBloqueados = false;
+    private float tiempoUltimoDisparo;
+    private bool _atorado = false;
     private Rigidbody2D _rigidbody2D;
-    private Animator _animator;
-    private float _horizontal;
+    
     private bool _tocaSuelo;
     private float _ultimoDisparo;
+    private float _cooldownDisparo = 0.5f;
+    private float _offsetDisparo = 0.12f;
     private float _salud = 5;
     public float Salud
     {
@@ -34,16 +46,36 @@ public class CristianMovimiento : MonoBehaviour
 
     private void Start()
     {
-        _velocidadBase = velocidad; // Guarda l
-                                    // a velocidad original
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _velocidadBase = _velocidad; // Guarda la velocidad original
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        // Movimiento
+        ActualizarOrientacion();
+
+        DetectarSuelo();
+        ProcesarSalto();
+        ProcesarDisparo();
+        VerificarCaida();
+    }
+    private void FixedUpdate()
+    {
+        if (_atorado)
+        {
+            // El jugador no puede moverse lateralmente mientras este atorado
+            _rigidbody2D.linearVelocity = new Vector2(0f, _rigidbody2D.linearVelocity.y);
+        }
+        else
+        {
+            _rigidbody2D.linearVelocity = new Vector2(_horizontal * _velocidad, _rigidbody2D.linearVelocity.y);
+        }
+    }
+    private void ActualizarOrientacion()
+    {
+         // Movimiento
         _horizontal = Input.GetAxisRaw("Horizontal");
 
         // Rotación del sprite
@@ -53,171 +85,184 @@ public class CristianMovimiento : MonoBehaviour
         // Animación de correr
         _animator.SetBool("corriendo", _horizontal != 0.0f);
 
-        // Detección de suelo
-        Debug.DrawRay(transform.position, Vector3.down * 0.12f, Color.red);
-        _tocaSuelo = Physics2D.Raycast(transform.position, Vector3.down, 0.12f);
-
-        // Salto normal
-        if (Input.GetKeyDown(KeyCode.W) && _tocaSuelo && !_saltoBloqueado)
-        {
-            Salto();
-
-            // Contar saltos solo si está stuneado
-            if (_stuneado)
-            {
-                _saltosRealizados++;
-                Debug.Log($"Saltos realizados: {_saltosRealizados}/{_saltosNecesarios}");
-            }
-        }
-
-        // Disparo (solo si no está bloqueado)
-        if (Input.GetKey(KeyCode.Space) && Time.time > _ultimoDisparo + 0.25f && !_disparosBloqueados)
-        {
-            Disparo();
-            _ultimoDisparo = Time.time;
-        }
     }
-    private void FixedUpdate()
+    private void DetectarSuelo()
     {
-        if (_stuneado)
+      // Detección de suelo
+        Vector3 origenCentro = transform.position;
+        Vector3 origenIzquierda = transform.position + Vector3.left * 0.035f;
+        Vector3 origenDerecha = transform.position + Vector3.right * 0.035f;
+
+        Debug.DrawRay(origenCentro, Vector3.down * distanciaRaycast, Color.red);
+        Debug.DrawRay(origenIzquierda, Vector3.down * distanciaRaycast, Color.red);
+        Debug.DrawRay(origenDerecha, Vector3.down * distanciaRaycast, Color.red);
+
+        _tocaSuelo =
+            Physics2D.Raycast(origenCentro, Vector3.down, distanciaRaycast) ||
+            Physics2D.Raycast(origenIzquierda, Vector3.down, distanciaRaycast) ||
+            Physics2D.Raycast(origenDerecha, Vector3.down, distanciaRaycast);
+   
+    }
+        private void ProcesarSalto()
+    {
+        if (Input.GetKeyDown(KeyCode.W) && PuedeSaltar())
         {
-            // El jugador no puede moverse lateralmente mientras esté stuneado
-            _rigidbody2D.linearVelocity = new Vector2(0f, _rigidbody2D.linearVelocity.y);
-        }
-        else
-        {
-            _rigidbody2D.linearVelocity = new Vector2(_horizontal * velocidad, _rigidbody2D.linearVelocity.y);
+            Saltar();
+            ContarSaltosSiAtorado();
         }
     }
 
-    private void Salto()
-{
-    if (_saltoBloqueado) return;
-    
-    _rigidbody2D.AddForce(Vector2.up * fuerzaSalto);
-}
+    private bool PuedeSaltar()
+    {
+        return _tocaSuelo && !_saltoBloqueado && !_atorado;
+    }
+
+    private void Saltar()
+    {
+        _rigidbody2D.AddForce(Vector2.up * _fuerzaSalto);
+        _animator.SetTrigger("saltar");
+    }
+
+    private void ContarSaltosSiAtorado()
+    {
+        if (_atorado)
+        {
+            _saltosRealizados++;
+            Debug.Log($"Saltos realizados: {_saltosRealizados}/{_saltosNecesarios}");
+        }
+    }
 
     public void BloquearDisparos(bool estado)
     {
         _disparosBloqueados = estado;
     }
-
-    private void Disparo()
+     private void ProcesarDisparo()
     {
-        if (_disparosBloqueados) return;
-
-        if (Time.time < tiempoUltimoDisparo + cooldownDisparo) return; // <-- Este es el cooldown
-
-        // Resto del código de disparo
-        Vector3 direccion = transform.localScale.x == 1.0f ? Vector3.right : Vector3.left;
-        GameObject disparo = Instantiate(disparoPrefab, transform.position + direccion * 0.12f, Quaternion.identity);
-        disparo.GetComponent<DisparoScript>().Direccion = direccion;
-
-        tiempoUltimoDisparo = Time.time; // <-- Actualizamos el tiempo del último disparo
+        if (Input.GetKey(KeyCode.Space) && PuedeDisparar())
+        {
+            Disparar();
+        }
     }
 
+    private bool PuedeDisparar()
+    {
+        return Time.time > _ultimoDisparo + _cooldownDisparo && !_disparosBloqueados;
+    }
+
+    private void Disparar()
+    {
+        Vector3 direccion = transform.localScale.x > 0 ? Vector3.right : Vector3.left;
+        Instantiate(_disparoPrefab, transform.position + direccion * _offsetDisparo, Quaternion.identity)
+            .GetComponent<DisparoScript>().Direccion = direccion;
+
+        _ultimoDisparo = Time.time;
+        _animator.SetTrigger("disparar");
+    }
+
+    private void VerificarCaida()
+    {
+        if (transform.position.y < -0.5f && _salud > 0)
+        {
+            Golpe(_salud);
+        }
+    }
+
+   
+
+  
+    public void RecibirDano(float dano)
+    {
+        _salud -= dano;
+        
+        if (_salud <= 0)
+        {
+            Morir();
+        }
+        else
+        {
+            _animator.SetTrigger("golpe");
+        }
+    }
+
+    private void Morir()
+    {
+        _animator.SetTrigger("morir");
+        Destroy(gameObject, 4f);
+        //FindAnyObjectByType<ControlGameover>().MostrarGameOver();
+    }
 
     public void Golpe(float dano)
     {
-        _salud = _salud - dano;
-        if (_salud <= 0) Destroy(gameObject);
-    }
+        RecibirDano(dano);
 
-    public void AplicarStun()
+    }   
+     public void AplicarStun()
     {
-        if (!_stuneado)
+        if (!_atorado)
         {
-            _stuneado = true;
+            _atorado = true;
             _saltosNecesarios = 3;
             _saltosRealizados = 0;
             StartCoroutine(StunCoroutine());
-
-            // Feedback adicional
             Debug.Log("¡Estás aturdido! Salta 3 veces para liberarte");
         }
     }
 
-    IEnumerator StunCoroutine()
+    private IEnumerator StunCoroutine()
     {
-        // Guardar estado original
-        bool podiaDisparar = !_disparosBloqueados;
+        Color originalColor = _spriteRenderer.color;
+        _spriteRenderer.color = Color.yellow;
 
-        // Aplicar stun (bloquear disparos)
-        _disparosBloqueados = true;
-
-        // Efecto visual
-        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-        Color originalColor = renderer.color;
-        renderer.color = Color.yellow;
-
-        // Esperar a que el jugador salte 3 veces
         while (_saltosRealizados < _saltosNecesarios)
         {
             yield return null;
         }
 
-        // Restaurar estado
-        _stuneado = false;
-        _disparosBloqueados = !podiaDisparar; // Restaurar estado original de los disparos
-        renderer.color = originalColor;
-
-        // Resetear contador de saltos
-        _saltosRealizados = 0;
-        _saltosNecesarios = 0;
+        _atorado = false;
+        _spriteRenderer.color = originalColor;
+        ResetearContadorSaltos();
     }
-
 
     public void AplicarRalentizacion(float factor, float duracion)
     {
-        // Detener ralentización existente
         StopAllCoroutines();
-
-        // Aplicar nueva ralentización
-        StartCoroutine(EfectoRalentizacion(factor, duracion));
+        StartCoroutine(EfectoRalentizacionCoroutine(factor, duracion));
     }
 
-    private IEnumerator EfectoRalentizacion(float factor, float duracion)
+    private IEnumerator EfectoRalentizacionCoroutine(float factor, float duracion)
     {
-        // Aplicar efecto
-        velocidad = _velocidadBase * factor;
+        _velocidad = _velocidadBase * factor;
+        _spriteRenderer.color = Color.blue;
 
-        // Efecto visual (opcional)
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = Color.blue;
-        }
-
-        // Esperar duración
         yield return new WaitForSeconds(duracion);
 
-        // Restaurar valores
-        velocidad = _velocidadBase;
-
-
-        spriteRenderer.color = Color.white;
-
+        _velocidad = _velocidadBase;
+        _spriteRenderer.color = Color.white;
     }
 
     public void BloquearSalto(float duracion)
-{
-    if (!_saltoBloqueado)
     {
-        StartCoroutine(BloqueoSaltoCoroutine(duracion));
+        if (!_saltoBloqueado)
+        {
+            StartCoroutine(BloqueoSaltoCoroutine(duracion));
+        }
     }
-}
 
-private IEnumerator BloqueoSaltoCoroutine(float duracion)
-{
-    _saltoBloqueado = true;
-    
-    // Efecto visual opcional
-    SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-    Color originalColor = renderer.color;
-    renderer.color = Color.magenta;
-    
-    yield return new WaitForSeconds(duracion);
-    
-    _saltoBloqueado = false;
-    renderer.color = originalColor;
-}
+    private IEnumerator BloqueoSaltoCoroutine(float duracion)
+    {
+        _saltoBloqueado = true;
+        Color originalColor = _spriteRenderer.color;
+        _spriteRenderer.color = Color.magenta;
+        
+        yield return new WaitForSeconds(duracion);
+        
+        _saltoBloqueado = false;
+        _spriteRenderer.color = originalColor;
+    }
+
+    private void ResetearContadorSaltos()
+    {
+        _saltosRealizados = 0;
+        _saltosNecesarios = 0;
+    }
 }

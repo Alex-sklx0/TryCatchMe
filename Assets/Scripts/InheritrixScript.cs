@@ -42,7 +42,7 @@ private void Disparo()
     {
         case 1:
             disparo = Instantiate(disparoPrefab, posicionDisparo, Quaternion.identity);
-            disparo.GetComponent<DisparoGetterGoblinScript>().Direccion = direccion;
+            disparo.GetComponent<DisparoGetterGoblin>().Direccion = direccion;
             break;
         case 2:
             disparo = Instantiate(disparoHieloPrefab, posicionDisparo, Quaternion.identity);

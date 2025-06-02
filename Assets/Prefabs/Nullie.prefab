@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cristian: {fileID: 0}
   velocidad: 0.3
+  radioMovimiento: 0.5
   distanciaActivacion: 0.15
   "cooldownDa\xF1o": 1
   duracionBloqueo: 3

@@ -8,5 +8,20 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/nivel1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/jefe1.unity
+    guid: c2f7cf0702ccd6e49ab674f8c8c75b99
+  - enabled: 1
+    path: Assets/Scenes/jefe2.unity
+    guid: 91f00d35d449bc845bb6e7f8bf7d17af
+  - enabled: 1
+    path: Assets/Scenes/jefe3.unity
+    guid: 71344b0cd60e9164780b693b947b2f88
+  - enabled: 1
+    path: Assets/Scenes/nivel2.unity
+    guid: ad6cec77a526be14ab4942417a9736e0
+  - enabled: 1
+    path: Assets/Scenes/nivel3.unity
+    guid: 8071b5d459e25dc4aa8af65ae357dcab
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

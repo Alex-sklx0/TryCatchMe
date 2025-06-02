@@ -1,126 +1,136 @@
 using UnityEngine;
 using System.Collections;
 
-public class NullieScript : MonoBehaviour
+public class Nullie : MonoBehaviour, IDanable
 {
-    [Header("Configuración Básica")]
-    public Transform cristian;
-    public float velocidad = 2.5f;
-    
-    [Header("Efecto de Daño")]
-    public float distanciaActivacion = 2f;
-    public float cooldownDaño = 1f;
-    
-    [Header("Efecto de Bloqueo")]
-    public float duracionBloqueo = 3f;
-    public float tiempoEntreBloqueos = 5f;
-    public float tiempoMinimoEntreBloqueos = 2f; // Nuevo: tiempo mínimo antes de poder bloquear de nuevo
-    
-    [Header("Audio")]
+    //constantes
+    private const float _velocidad = 0.3f;
+    private const float _radioMovimiento = 0.43f; // Nuevo radio para activar el movimiento
+
+    private const float _distanciaActivacion = 0.15f;
+    private const float _cooldownDano = 1f;
+
+    private const float _tiempoEsperaCiclo = 0.5f; 
+    private const float _duracionBloqueo = 4f; // Tiempo que dura el bloqueo activo.
+    private const float _cooldownBloqueo = 4f; // Tiempo total entre bloqueos   
+    private const float _constanteGiroSprite = 1f; //constante para cuando se gira el srite en direccion y,z
+    private const int _saludMin = 0;     
+
+    //serializados y variables publicos 
+    [SerializeField] private Transform _cristianPosicion;
+
     public AudioClip sonidoAdvertencia;
     public AudioClip sonidoBloqueo;
     public AudioClip sonidoDaño;
-    
+    //variables privadas
     private Rigidbody2D _rigidbody2D;
     private CristianMovimiento _cristianScript;
     private SpriteRenderer _spriteRenderer;
-    private float dano = 1f;
+    private float _dano = 1.25f;
     private int _salud = 5;
-    private float _ultimoDaño;
+    private float _ultimoDano;
     private float _ultimoBloqueo;
     private bool _bloqueoActivo;
     private bool _puedeBloquear = true;
+    private Vector2 _direccionMovimiento;
+    private bool _jugadorDetectado = false;
 
-    void Start()
+
+
+    public void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
+
+        if (_cristianPosicion == null)
         {
-            cristian = playerObj.transform;
-            _cristianScript = playerObj.GetComponent<CristianMovimiento>();
+            Debug.LogError("No se asignó la posición de Cristian (Transform).");
+            return;
+        }
+
+        // Usar operador de coalescencia nula para intentar obtener el componente y reportar errores
+        _cristianScript = _cristianPosicion.GetComponent<CristianMovimiento>();
+
+        if (_cristianScript == null)
+        {
+            Debug.LogError($"No se encontró el componente CristianMovimiento en el objeto {_cristianPosicion.name}.");
         }
     }
 
-    void Update()
+    public void Update()
     {
-        if (cristian == null || _cristianScript == null) return;
 
-        Vector2 direccion = cristian.position - transform.position;
-        
-        // Flip sprite
-        transform.localScale = new Vector3(
-            direccion.x >= 0 ? 1f : -1f, 
-            1f, 
-            1f
-        );
 
-        // Movimiento
-        _rigidbody2D.linearVelocity = direccion.normalized * velocidad;
+        //verificar en cada frame si cristian existe en la escena
+        if (_cristianPosicion == null) return;
+        //magnitud de distancia entre nullie y jugador
+        float distanciaAlJugador = Vector2.Distance(_cristianPosicion.position, transform.position);
+        //validar si está lo suficientemente cerca
+        _jugadorDetectado = distanciaAlJugador <= _radioMovimiento;
 
-        // Verificar distancia para efectos
-        if (direccion.magnitude <= distanciaActivacion)
+        if (_jugadorDetectado)
         {
-            AplicarDaño();
-            
-            // Solo intentar bloquear si no está ya bloqueando y ha pasado el tiempo mínimo
-            if (_puedeBloquear && !_bloqueoActivo && 
-                Time.time - _ultimoBloqueo >= tiempoMinimoEntreBloqueos)
+            //establecer la direccion
+            ActualizarOrientacion();
+            if (distanciaAlJugador <= _distanciaActivacion)
             {
-                StartCoroutine(CicloBloqueo());
+                AplicarDanoACristian();
+
+                //aplicar efecto de cancelacion de disparo
+
+                if (_puedeBloquear && !_bloqueoActivo && Time.time - _ultimoBloqueo >= _cooldownBloqueo)
+                {
+                    StartCoroutine(CicloBloqueo());
+                }
             }
         }
-    }
-
-    void AplicarDaño()
-    {
-        if (Time.time - _ultimoDaño >= cooldownDaño)
+        else
         {
-            _cristianScript.Golpe(dano);
-            _ultimoDaño = Time.time;
-            
-            _spriteRenderer.color = Color.red;
-            Invoke("ResetColor", 0.2f);
-            
+            _rigidbody2D.linearVelocity = Vector2.zero;
+        }
+    }
+    public void FixedUpdate()
+    {
+        if (_cristianPosicion == null) return;
+        //moverse hacia cristian
+        _rigidbody2D.linearVelocity = _direccionMovimiento * _velocidad;
+    }
+           private void ActualizarOrientacion()
+    {
+            _direccionMovimiento = (_cristianPosicion.position - transform.position).normalized;
+            transform.localScale = new Vector3(Mathf.Sign(_direccionMovimiento.x), _constanteGiroSprite, _constanteGiroSprite);
+    }
+    private void AplicarDanoACristian()
+    {
+        if (Time.time - _ultimoDano >= _cooldownDano)
+        {
+            _cristianScript.Golpe(_dano);
+            _ultimoDano = Time.time;
+
+
             if (sonidoDaño != null) PlaySound(sonidoDaño);
         }
     }
 
-    IEnumerator CicloBloqueo()
+    private IEnumerator CicloBloqueo()
     {
         _puedeBloquear = false;
         _bloqueoActivo = true;
         _ultimoBloqueo = Time.time;
 
-        // Fase de advertencia
-        _spriteRenderer.color = Color.yellow;
-        if (sonidoAdvertencia != null) PlaySound(sonidoAdvertencia);
-        yield return new WaitForSeconds(0.5f);
+        
+        yield return new WaitForSeconds(_tiempoEsperaCiclo);
 
-        // Fase de bloqueo activo
         _cristianScript.BloquearDisparos(true);
-        _spriteRenderer.color = Color.cyan;
-        if (sonidoBloqueo != null) PlaySound(sonidoBloqueo);
-        yield return new WaitForSeconds(duracionBloqueo);
+        
+        yield return new WaitForSeconds(_duracionBloqueo);
 
-        // Fin de bloqueo
         _cristianScript.BloquearDisparos(false);
         _bloqueoActivo = false;
-        _spriteRenderer.color = Color.white;
 
-        // Cooldown completo
-        yield return new WaitForSeconds(tiempoEntreBloqueos);
+        // Espera el cooldown restante (total - duración del bloqueo)
+        yield return new WaitForSeconds(_cooldownBloqueo - _duracionBloqueo);
         _puedeBloquear = true;
-    }
-
-    void ResetColor()
-    {
-        if (!_bloqueoActivo) // Solo resetear si no está en modo bloqueo
-        {
-            _spriteRenderer.color = Color.white;
-        }
     }
 
     void PlaySound(AudioClip clip)
@@ -131,15 +141,22 @@ public class NullieScript : MonoBehaviour
         }
     }
 
+    private void RecibirDano()
+    {
+        _salud--;
+        if (_salud <= _saludMin) Destroy(gameObject);//destruir con tiempo para aplciar la animacion } // Método público que llama al privado  
+    }
     public void Golpe()
     {
-        _salud -= 1;
-        if (_salud <= 0) Destroy(gameObject);
-    }
+        RecibirDano();
 
-    void OnDrawGizmosSelected()
+    }
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, distanciaActivacion);
+        Gizmos.DrawWireSphere(transform.position, _distanciaActivacion);
+
+        Gizmos.color = Color.cyan; // Para el nuevo radio de movimiento
+        Gizmos.DrawWireSphere(transform.position, _radioMovimiento);
     }
 }

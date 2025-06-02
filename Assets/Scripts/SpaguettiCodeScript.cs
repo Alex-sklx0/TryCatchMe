@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
 enum TipoAtaque { Albondiga, Espagueti, Queso }
 public class SpaghettiCodeBoss : MonoBehaviour
 {
@@ -22,15 +23,25 @@ public class SpaghettiCodeBoss : MonoBehaviour
     private bool _estaAtacando = false;
     // private Animator _animator;
     private int _salud =20;
-    
+    [SerializeField] private int saludMaxima = 10;
+
+    [SerializeField] private GameObject[] traceOpciones; // los 3 traces en la escena
+private string traceCorrectoIndex ="1";
+private bool modoPuzzleActivo = false;
+
 
     private void Start()
     {
+        
         // _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         jugador = GameObject.FindGameObjectWithTag("Player").transform;
+        _salud = saludMaxima;
+         foreach (GameObject trace in traceOpciones)
+        trace.SetActive(false);
         if (jugador != null)
             StartCoroutine(CicloDeAtaque());    }
+    
     private IEnumerator CicloDeAtaque()
     {
         while (true)
@@ -115,14 +126,69 @@ public class SpaghettiCodeBoss : MonoBehaviour
             _ => puntoAtaqueBajo,
         };
     }
+  public void IniciarModoPuzzle()
+{
+    modoPuzzleActivo = true;
 
-    public void Golpe()
+    foreach (GameObject trace in traceOpciones)
+        trace.SetActive(true);
+}
+
+
+public void VerificarTrace(string idSeleccionado)
+{
+    if (!modoPuzzleActivo) return;
+
+    if (idSeleccionado.Equals( traceCorrectoIndex))
     {
-        _spriteRenderer.color = Color.white;
-        _salud--;
-        if (_salud <= 0)
-            Destroy(gameObject);
+        Debug.Log("¡Correcto! El jefe ha sido derrotado.");
+        MatarJefe();
     }
+    else
+    {
+        Debug.Log("Incorrecto. El jefe recupera fuerza...");
+        _salud = Mathf.Min(_salud + 3, saludMaxima); // recupera vida
+        modoPuzzleActivo = false;
+
+        foreach (GameObject trace in traceOpciones)
+            trace.SetActive(false);
+
+    }
+}
+
+
+public void Golpe()
+    {
+
+        if (modoPuzzleActivo) return; // no se puede dañar
+
+        _salud--;
+
+        if (_salud <= 3 && !modoPuzzleActivo) // umbral para entrar en modo puzzle
+{
+    AsignarTraceCorrecto(1); // defines tú cuál es el correcto
+    IniciarModoPuzzle();     // ← corregido aquí el nombre del método
+    return;
+}
+
+
+        if (_salud <= 0)
+        {
+            MatarJefe();
+        }
+    }
+    private void MatarJefe()
+{
+    Debug.Log("El jefe ha sido destruido.");
+    Destroy(gameObject);
+}
+
+public void AsignarTraceCorrecto(int index)
+{
+traceCorrectoIndex = index.ToString();
+
+}
+
 
     private void OnDrawGizmosSelected()
     {

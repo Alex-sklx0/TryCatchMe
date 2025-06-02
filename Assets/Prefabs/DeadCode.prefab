@@ -169,6 +169,7 @@ MonoBehaviour:
   cristian: {fileID: 0}
   velocidad: 0.3
   distanciaAutodestruccion: 0.2
-  danoPorAutodestruccion: 1
+  danoPorAutodestruccion: 0.5
   sonido: {fileID: 0}
   sonidoExplosion: {fileID: 0}
+  radioDeDeteccion: 0.43
