@@ -9,7 +9,7 @@ public class GetterGoblin : MonoBehaviour, IDanable
     private const float ConstanteDireccionDisparo = 0.0f; //constante para cuando genera un disparo en direccion y,z
     private const float ConstanteHorizontalDisparo = 0.12f; //constante para cuando genera un disparo en direccion y,z
 
-    private const float ConstanteGiroSprite = 1f; //constante para cuando se gira el srite en direccion y,z
+    private const float ConstanteEjeSprite = 1f; //constante para cuando se gira el srite en direccion y,z
     private const int SaludMin = 0;
     private const float RangoDisparo = 0.8f;
         
@@ -46,7 +46,7 @@ public class GetterGoblin : MonoBehaviour, IDanable
        private void ActualizarOrientacion()
     {
             _direccionMovimiento = (_cristianPosicion.position - transform.position).normalized;
-            transform.localScale = new Vector3(Mathf.Sign(_direccionMovimiento.x), ConstanteGiroSprite, ConstanteGiroSprite);
+            transform.localScale = new Vector3(Mathf.Sign(_direccionMovimiento.x), ConstanteEjeSprite, ConstanteEjeSprite);
     }
 
     private void ControlarDisparo()
