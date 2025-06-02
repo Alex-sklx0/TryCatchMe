@@ -5,14 +5,14 @@ using UnityEngine;
 public class CristianMovimiento : MonoBehaviour
 {
     //constantes
-    private const float cooldownDisparo = 0.5f;
-    private const float distanciaRaycast = 0.12f;
-    private const float _constanteGiroSprite = 1f; //constante para cuando se gira el srite en direccion y,z
-    private const int _saludMin = 0;
+    private const float CooldownDisparo = 0.5f;
+    private const float DistanciaRaycast = 0.12f;
+    private const float EscalaEjesSprite = 1.0f; //constante para cuando se gira el srite en direccion y,z
+    private const int SaludMin = 0;
 
     //serialized y variables publicas
     [SerializeField] private GameObject _disparoPrefab;
-[SerializeField]private Animator _animator;
+    [SerializeField] private Animator _animator;
 
     //variables privadas
     private float _horizontal;
@@ -30,7 +30,7 @@ public class CristianMovimiento : MonoBehaviour
     private float tiempoUltimoDisparo;
     private bool _atorado = false;
     private Rigidbody2D _rigidbody2D;
-    
+
     private bool _tocaSuelo;
     private float _ultimoDisparo;
     private float _cooldownDisparo = 0.5f;
@@ -75,12 +75,12 @@ public class CristianMovimiento : MonoBehaviour
     }
     private void ActualizarOrientacion()
     {
-         // Movimiento
+        // Movimiento
         _horizontal = Input.GetAxisRaw("Horizontal");
 
         // Rotación del sprite
-        if (_horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-        else if (_horizontal > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        if (_horizontal < 0.0f) transform.localScale = new Vector3(-EscalaEjesSprite, EscalaEjesSprite, EscalaEjesSprite);
+        else if (_horizontal > 0.0f) transform.localScale = new Vector3(EscalaEjesSprite, EscalaEjesSprite, EscalaEjesSprite);
 
         // Animación de correr
         _animator.SetBool("corriendo", _horizontal != 0.0f);
@@ -88,22 +88,22 @@ public class CristianMovimiento : MonoBehaviour
     }
     private void DetectarSuelo()
     {
-      // Detección de suelo
+        // Detección de suelo
         Vector3 origenCentro = transform.position;
         Vector3 origenIzquierda = transform.position + Vector3.left * 0.035f;
         Vector3 origenDerecha = transform.position + Vector3.right * 0.035f;
 
-        Debug.DrawRay(origenCentro, Vector3.down * distanciaRaycast, Color.red);
-        Debug.DrawRay(origenIzquierda, Vector3.down * distanciaRaycast, Color.red);
-        Debug.DrawRay(origenDerecha, Vector3.down * distanciaRaycast, Color.red);
+        Debug.DrawRay(origenCentro, Vector3.down * DistanciaRaycast, Color.red);
+        Debug.DrawRay(origenIzquierda, Vector3.down * DistanciaRaycast, Color.red);
+        Debug.DrawRay(origenDerecha, Vector3.down * DistanciaRaycast, Color.red);
 
         _tocaSuelo =
-            Physics2D.Raycast(origenCentro, Vector3.down, distanciaRaycast) ||
-            Physics2D.Raycast(origenIzquierda, Vector3.down, distanciaRaycast) ||
-            Physics2D.Raycast(origenDerecha, Vector3.down, distanciaRaycast);
-   
+            Physics2D.Raycast(origenCentro, Vector3.down, DistanciaRaycast) ||
+            Physics2D.Raycast(origenIzquierda, Vector3.down, DistanciaRaycast) ||
+            Physics2D.Raycast(origenDerecha, Vector3.down, DistanciaRaycast);
+
     }
-        private void ProcesarSalto()
+    private void ProcesarSalto()
     {
         if (Input.GetKeyDown(KeyCode.W) && PuedeSaltar())
         {
@@ -136,7 +136,7 @@ public class CristianMovimiento : MonoBehaviour
     {
         _disparosBloqueados = estado;
     }
-     private void ProcesarDisparo()
+    private void ProcesarDisparo()
     {
         if (Input.GetKey(KeyCode.Space) && PuedeDisparar())
         {
@@ -153,7 +153,7 @@ public class CristianMovimiento : MonoBehaviour
     {
         Vector3 direccion = transform.localScale.x > 0 ? Vector3.right : Vector3.left;
         Instantiate(_disparoPrefab, transform.position + direccion * _offsetDisparo, Quaternion.identity)
-            .GetComponent<DisparoScript>().Direccion = direccion;
+            .GetComponent<DisparoCristian>().Direccion = direccion;
 
         _ultimoDisparo = Time.time;
         _animator.SetTrigger("disparar");
@@ -167,13 +167,13 @@ public class CristianMovimiento : MonoBehaviour
         }
     }
 
-   
 
-  
+
+
     public void RecibirDano(float dano)
     {
         _salud -= dano;
-        
+
         if (_salud <= 0)
         {
             Morir();
@@ -195,8 +195,8 @@ public class CristianMovimiento : MonoBehaviour
     {
         RecibirDano(dano);
 
-    }   
-     public void AplicarStun()
+    }
+    public void AplicarAtoramiento()
     {
         if (!_atorado)
         {
@@ -253,9 +253,9 @@ public class CristianMovimiento : MonoBehaviour
         _saltoBloqueado = true;
         Color originalColor = _spriteRenderer.color;
         _spriteRenderer.color = Color.magenta;
-        
+
         yield return new WaitForSeconds(duracion);
-        
+
         _saltoBloqueado = false;
         _spriteRenderer.color = originalColor;
     }

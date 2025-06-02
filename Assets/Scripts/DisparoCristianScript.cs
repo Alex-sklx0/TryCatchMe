@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DisparoScript : MonoBehaviour
+public class DisparoCristian : MonoBehaviour
 {
-    private const float _velocidad = 0.5f;
-    [SerializeField] private AudioClip sonido;
+    private const float Velocidad = 0.5f;
+    private const string TagJugador = "Player";
+    private const string TagDisparoJugador = "Disparo";
+
+
+    [SerializeField] private AudioClip _sonido;
 
     private Rigidbody2D _rigidbody2D;
     private Vector3 _direccion;
@@ -21,14 +25,14 @@ public class DisparoScript : MonoBehaviour
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(sonido);
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(_sonido);
     }
 
     private void FixedUpdate()
     {
         if (_direccion != Vector3.zero)
         {
-            _rigidbody2D.linearVelocity = _direccion * _velocidad;
+            _rigidbody2D.linearVelocity = _direccion * Velocidad;
         }
     }
 
@@ -94,11 +98,11 @@ public class DisparoScript : MonoBehaviour
     private bool DebeIgnorarColision(Collider2D other)
     {
         // Ignora colisiones con el jugador y ciertas capas
-        return other.CompareTag("Player");
+        return other.CompareTag(TagJugador);
     }
     private bool EsColisionConOtroDisparo(Collider2D other)
     {
-        return other.CompareTag("Disparo");
+        return other.CompareTag(TagDisparoJugador);
     }
     private void ProcesarImpacto(Collider2D other)
     {

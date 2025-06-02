@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TraceInteractivo : MonoBehaviour
 {
-    [SerializeField] private SpaghettiCodeBoss jefe;
+    [SerializeField] private SpaghettiCode jefe;
 
     private void OnTriggerEnter2D(Collider2D other)
     {

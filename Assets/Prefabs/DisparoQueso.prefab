@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8645772517455690729}
   - component: {fileID: 6799416504484373428}
   m_Layer: 0
-  m_Name: parmesano
+  m_Name: DisparoQueso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

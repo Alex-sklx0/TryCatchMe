@@ -4,17 +4,17 @@ using System.Collections;
 public class Nullie : MonoBehaviour, IDanable
 {
     //constantes
-    private const float _velocidad = 0.3f;
-    private const float _radioMovimiento = 0.43f; // Nuevo radio para activar el movimiento
+    private const float Velocidad = 0.3f;
+    private const float RadioMovimiento = 0.43f; // Nuevo radio para activar el movimiento
 
-    private const float _distanciaActivacion = 0.15f;
-    private const float _cooldownDano = 1f;
+    private const float DistanciaActivacion = 0.15f;
+    private const float CooldownDano = 1f;
 
-    private const float _tiempoEsperaCiclo = 0.5f; 
-    private const float _duracionBloqueo = 4f; // Tiempo que dura el bloqueo activo.
-    private const float _cooldownBloqueo = 4f; // Tiempo total entre bloqueos   
-    private const float _constanteGiroSprite = 1f; //constante para cuando se gira el srite en direccion y,z
-    private const int _saludMin = 0;     
+    private const float TiempoEsperaCiclo = 0.5f; 
+    private const float DuracionBloqueo = 4f; // Tiempo que dura el bloqueo activo.
+    private const float CooldownBloqueo = 4f; // Tiempo total entre bloqueos   
+    private const float ConstanteGiroSprite = 1f; //constante para cuando se gira el srite en direccion y,z
+    private const int SaludMin = 0;     
 
     //serializados y variables publicos 
     [SerializeField] private Transform _cristianPosicion;
@@ -66,19 +66,19 @@ public class Nullie : MonoBehaviour, IDanable
         //magnitud de distancia entre nullie y jugador
         float distanciaAlJugador = Vector2.Distance(_cristianPosicion.position, transform.position);
         //validar si está lo suficientemente cerca
-        _jugadorDetectado = distanciaAlJugador <= _radioMovimiento;
+        _jugadorDetectado = distanciaAlJugador <= RadioMovimiento;
 
         if (_jugadorDetectado)
         {
             //establecer la direccion
             ActualizarOrientacion();
-            if (distanciaAlJugador <= _distanciaActivacion)
+            if (distanciaAlJugador <= DistanciaActivacion)
             {
                 AplicarDanoACristian();
 
                 //aplicar efecto de cancelacion de disparo
 
-                if (_puedeBloquear && !_bloqueoActivo && Time.time - _ultimoBloqueo >= _cooldownBloqueo)
+                if (_puedeBloquear && !_bloqueoActivo && Time.time - _ultimoBloqueo >= CooldownBloqueo)
                 {
                     StartCoroutine(CicloBloqueo());
                 }
@@ -93,16 +93,16 @@ public class Nullie : MonoBehaviour, IDanable
     {
         if (_cristianPosicion == null) return;
         //moverse hacia cristian
-        _rigidbody2D.linearVelocity = _direccionMovimiento * _velocidad;
+        _rigidbody2D.linearVelocity = _direccionMovimiento * Velocidad;
     }
            private void ActualizarOrientacion()
     {
             _direccionMovimiento = (_cristianPosicion.position - transform.position).normalized;
-            transform.localScale = new Vector3(Mathf.Sign(_direccionMovimiento.x), _constanteGiroSprite, _constanteGiroSprite);
+            transform.localScale = new Vector3(Mathf.Sign(_direccionMovimiento.x), ConstanteGiroSprite, ConstanteGiroSprite);
     }
     private void AplicarDanoACristian()
     {
-        if (Time.time - _ultimoDano >= _cooldownDano)
+        if (Time.time - _ultimoDano >= CooldownDano)
         {
             _cristianScript.Golpe(_dano);
             _ultimoDano = Time.time;
@@ -119,17 +119,17 @@ public class Nullie : MonoBehaviour, IDanable
         _ultimoBloqueo = Time.time;
 
         
-        yield return new WaitForSeconds(_tiempoEsperaCiclo);
+        yield return new WaitForSeconds(TiempoEsperaCiclo);
 
         _cristianScript.BloquearDisparos(true);
         
-        yield return new WaitForSeconds(_duracionBloqueo);
+        yield return new WaitForSeconds(DuracionBloqueo);
 
         _cristianScript.BloquearDisparos(false);
         _bloqueoActivo = false;
 
         // Espera el cooldown restante (total - duración del bloqueo)
-        yield return new WaitForSeconds(_cooldownBloqueo - _duracionBloqueo);
+        yield return new WaitForSeconds(CooldownBloqueo - DuracionBloqueo);
         _puedeBloquear = true;
     }
 
@@ -144,7 +144,7 @@ public class Nullie : MonoBehaviour, IDanable
     private void RecibirDano()
     {
         _salud--;
-        if (_salud <= _saludMin) Destroy(gameObject);//destruir con tiempo para aplciar la animacion } // Método público que llama al privado  
+        if (_salud <= SaludMin) Destroy(gameObject);//destruir con tiempo para aplciar la animacion } // Método público que llama al privado  
     }
     public void Golpe()
     {
@@ -154,9 +154,9 @@ public class Nullie : MonoBehaviour, IDanable
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, _distanciaActivacion);
+        Gizmos.DrawWireSphere(transform.position, DistanciaActivacion);
 
         Gizmos.color = Color.cyan; // Para el nuevo radio de movimiento
-        Gizmos.DrawWireSphere(transform.position, _radioMovimiento);
+        Gizmos.DrawWireSphere(transform.position, RadioMovimiento);
     }
 }

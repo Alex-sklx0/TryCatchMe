@@ -63,7 +63,7 @@ private IEnumerator DispararRayosSecuencial()
 
     public void Golpe()
     {
-        _salud -= 1;
+        _salud --;
         if (_salud == 0) Destroy(gameObject);
     }
 }

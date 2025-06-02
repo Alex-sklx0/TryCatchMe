@@ -5,13 +5,13 @@ using UnityEngine;
 public class GetterGoblin : MonoBehaviour, IDanable
 {
     //constantes
-     private float _cooldownDisparo = 1.25f;
-    private const float _constanteDireccionDisparo = 0.0f; //constante para cuando genera un disparo en direccion y,z
-    private const float _constanteHorizontalDisparo = 0.12f; //constante para cuando genera un disparo en direccion y,z
+    private const float CooldownDisparo = 1.25f;
+    private const float ConstanteDireccionDisparo = 0.0f; //constante para cuando genera un disparo en direccion y,z
+    private const float ConstanteHorizontalDisparo = 0.12f; //constante para cuando genera un disparo en direccion y,z
 
-    private const float _constanteGiroSprite = 1f; //constante para cuando se gira el srite en direccion y,z
-    private const int _saludMin = 0;
-    private const float _rangoDisparo = 0.8f;
+    private const float ConstanteGiroSprite = 1f; //constante para cuando se gira el srite en direccion y,z
+    private const int SaludMin = 0;
+    private const float RangoDisparo = 0.8f;
         
     //serialize y variables publicas
     [SerializeField] private Transform _cristianPosicion;
@@ -46,13 +46,13 @@ public class GetterGoblin : MonoBehaviour, IDanable
        private void ActualizarOrientacion()
     {
             _direccionMovimiento = (_cristianPosicion.position - transform.position).normalized;
-            transform.localScale = new Vector3(Mathf.Sign(_direccionMovimiento.x), _constanteGiroSprite, _constanteGiroSprite);
+            transform.localScale = new Vector3(Mathf.Sign(_direccionMovimiento.x), ConstanteGiroSprite, ConstanteGiroSprite);
     }
 
     private void ControlarDisparo()
     {
         float distanciaAlJugador = Vector3.Distance(_cristianPosicion.position, transform.position);
-        if (distanciaAlJugador <= _rangoDisparo && Time.time > _ultimoTiro + _cooldownDisparo)
+        if (distanciaAlJugador <= RangoDisparo && Time.time > _ultimoTiro + CooldownDisparo)
         {
             Disparar();
             _ultimoTiro = Time.time;
@@ -61,15 +61,15 @@ public class GetterGoblin : MonoBehaviour, IDanable
 
     private void Disparar()
     {
-        Vector3 direccion = new Vector3(transform.localScale.x, _constanteDireccionDisparo, _constanteDireccionDisparo);
-        GameObject disparo = Instantiate(_disparoPrefab, transform.position + direccion * _constanteHorizontalDisparo, Quaternion.identity);
+        Vector3 direccion = new Vector3(transform.localScale.x, ConstanteDireccionDisparo, ConstanteDireccionDisparo);
+        GameObject disparo = Instantiate(_disparoPrefab, transform.position + direccion * ConstanteHorizontalDisparo, Quaternion.identity);
         disparo.GetComponent<DisparoGetterGoblin>().Direccion = direccion;
     }
 
   private void RecibirDano()
     {
         _salud--;
-        if (_salud <= 0) Destroy(gameObject);//destruir con tiempo para aplciar la animacion } // Método público que llama al privado  
+        if (_salud <= SaludMin) Destroy(gameObject);//destruir con tiempo para aplciar la animacion } // Método público que llama al privado  
     }
     public void Golpe()
     {
