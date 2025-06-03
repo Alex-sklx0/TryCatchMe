@@ -2,55 +2,97 @@ using UnityEngine;
 
 public class DisparoAlbondiga : MonoBehaviour
 {
-    //constantes
+    // CONSTANTES
     private const float EscalaGravedadReducida = 0.3f;
     private const float TiempoVida = 5f;
     private const float Dano = 1f;
     private const string TagJugador = "Player";
     private const string TagSuelo = "Ground";
+    private const float TiempoDestruccionInmediato = 0f;
 
-    //variables privadas
+    // PRIVADAS 
     private Rigidbody2D _rigidbody2D;
 
-    void Start()
+    private void Start()
     {
-        ObtenerComponentes();
-        Autodestruir();
+        try
+        {
+            ObtenerComponentes();
+            Autodestruir();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error en Start: {e.Message}", this);
+        }
     }
-      public void ObtenerComponentes()
+
+    public void ObtenerComponentes()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        _rigidbody2D.gravityScale = EscalaGravedadReducida; // se modifica la gravedad para que caiga mas lento    }
+        try
+        {
+            _rigidbody2D = GetComponent<Rigidbody2D>();
+            _rigidbody2D.gravityScale = EscalaGravedadReducida;
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error al obtener Rigidbody2D: {e.Message}", this);
+        }
     }
+
     private void Autodestruir()
     {
-        Destroy(gameObject, TiempoVida); //se destruye el objeto despues de un tiempo
-
+        try
+        {
+            Destroy(gameObject, TiempoVida);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error al programar autodestrucción: {e.Message}", this);
+        }
     }
+
     public void LanzarDisparo(Vector2 direccion, float fuerza)
     {
-        RedirigirDisparo(direccion, fuerza);
+        try
+        {
+            RedirigirDisparo(direccion, fuerza);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error al lanzar disparo: {e.Message}", this);
+        }
     }
+
     private void RedirigirDisparo(Vector2 direccion, float fuerza)
     {
-        _rigidbody2D = _rigidbody2D != null ? _rigidbody2D : GetComponent<Rigidbody2D>();
-        _rigidbody2D.AddForce(direccion.normalized * fuerza, ForceMode2D.Impulse);
+        try
+        {
+            _rigidbody2D = _rigidbody2D != null ? _rigidbody2D : GetComponent<Rigidbody2D>();
+            _rigidbody2D.AddForce(direccion.normalized * fuerza, ForceMode2D.Impulse);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error al redirigir disparo: {e.Message}", this);
+        }
     }
-    // Se llama desde el jefe con dirección ajustada hacia el jugador
 
-  
-    //cuando colisiona con algo
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(TagJugador))//cuando colisiona con cristian, que tiene el tag "Player" 
+        try
         {
-            other.GetComponent<CristianMovimiento>()?.Golpe(Dano);//confirmar si se pueden acceder a los metodos y propiedades de cristian
-            Destroy(gameObject);
+            if (other.CompareTag(TagJugador))
+            {
+                other.GetComponent<CristianMovimiento>()?.Golpe(Dano);
+                Destroy(gameObject, TiempoDestruccionInmediato);
+            }
+            else if (other.CompareTag(TagSuelo))
+            {
+                Destroy(gameObject, TiempoDestruccionInmediato);
+            }
         }
-        else if (other.CompareTag(TagSuelo))//cuando choca con el suelo se destruye
+        catch (System.Exception e)
         {
-            Destroy(gameObject);
+            Debug.LogError($"Error en colisión con {other.name}: {e.Message}", this);
         }
     }
 }
-

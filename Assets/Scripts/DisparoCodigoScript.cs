@@ -11,63 +11,103 @@ public class ChorroDisparo : MonoBehaviour
     private const string TagSuelo = "Ground";
     private const string TagIgnorar = "DisparoCrashtian";
 
-    // ─────────────────────────────────────────────
     // Variables privadas
     private Rigidbody2D _rigidbody2D;
 
-    // ─────────────────────────────────────────────
-    private void Start()
+ private void Start()
     {
-        InicializarFisica();
-        AutodestruirDespuesDeTiempo();
+        try
+        {
+            InicializarFisica();
+            AutodestruirDespuesDeTiempo();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[ChorroDisparo] Error en Start: {e.Message}", this);
+        }
     }
 
     private void InicializarFisica()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        if (_rigidbody2D != null)
+        try
         {
-            _rigidbody2D.gravityScale = Gravedad;
+            _rigidbody2D = GetComponent<Rigidbody2D>();
+            if (_rigidbody2D != null)
+            {
+                _rigidbody2D.gravityScale = Gravedad;
+            }
+            else
+            {
+                Debug.LogWarning("[ChorroDisparo] Rigidbody2D no encontrado en el objeto.");
+            }
         }
-        else
+        catch (System.Exception e)
         {
-            Debug.LogWarning("No se encontró Rigidbody2D en el objeto.");
+            Debug.LogError($"[ChorroDisparo] Error al inicializar físicas: {e.Message}", this);
         }
     }
 
     private void AutodestruirDespuesDeTiempo()
     {
-        Destroy(gameObject, TiempoVida);
+        try
+        {
+            Destroy(gameObject, TiempoVida);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[ChorroDisparo] Error al programar autodestrucción: {e.Message}", this);
+        }
     }
 
     public void Inicializar(Vector2 direccion, float fuerza)
     {
-        if (_rigidbody2D == null)
-            _rigidbody2D = GetComponent<Rigidbody2D>();
-
-        if (_rigidbody2D != null)
+        try
         {
-            _rigidbody2D.AddForce(direccion.normalized * fuerza, ForceMode2D.Impulse);
+            _rigidbody2D = _rigidbody2D != null ? _rigidbody2D : GetComponent<Rigidbody2D>();
+
+            if (_rigidbody2D != null)
+            {
+                _rigidbody2D.AddForce(direccion.normalized * fuerza, ForceMode2D.Impulse);
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[ChorroDisparo] Error al aplicar fuerza: {e.Message}", this);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(TagIgnorar)) return;
+        try
+        {
+            if (other.CompareTag(TagIgnorar)) return;
 
-        if (other.CompareTag(TagJugador))
-        {
-            other.GetComponent<CristianMovimiento>()?.Golpe(Dano);
-            DestruirDisparo();
+            if (other.CompareTag(TagJugador))
+            {
+                CristianMovimiento cristian = other.GetComponent<CristianMovimiento>();
+                cristian?.Golpe(Dano);
+                DestruirDisparo();
+            }
+            else if (other.CompareTag(TagSuelo))
+            {
+                DestruirDisparo();
+            }
         }
-        else if (other.CompareTag(TagSuelo))
+        catch (System.Exception e)
         {
-            DestruirDisparo();
+            Debug.LogError($"[ChorroDisparo] Error en colisión con {other.name}: {e.Message}", this);
         }
     }
 
     private void DestruirDisparo()
     {
-        Destroy(gameObject);
+        try
+        {
+            Destroy(gameObject);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[ChorroDisparo] Error al destruir disparo: {e.Message}", this);
+        }
     }
 }

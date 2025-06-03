@@ -5,19 +5,22 @@ using System.Linq;
 
 public class CrashtianScript : MonoBehaviour, IDanable, IVerificadorTrace
 {
-    // --- ENUM DE ATAQUES ---
-    private enum TipoAtaque
-    {
-        Estalactitas = 0,
-        DisparoGrande = 1,
-        Chorros = 2
-    }
+    private enum TipoAtaque { Estalactitas = 0, DisparoGrande = 1, Chorros = 2 }
 
     // --- CONSTANTES ---
     private const float TiempoEntreAtaques = 3f;
     private const float TiempoAviso = 1f;
     private const int UmbralVidaPuzzle = 3;
     private const int SaludMinima = 0;
+    private const float RetrasoCaidaEstalactita = 1.2f;
+    private const float MinEsperaEstalactita = 0.2f;
+    private const float MaxEsperaEstalactita = 0.5f;
+    private const int CantidadDisparosChorro = 5;
+    private const float EsperaEntreDisparosChorro = 0.2f;
+    private const float AnguloBaseChorro = 30f;
+    private const float FuerzaDisparoChorro = 1.3f;
+    private const int TraceCorrectoPorDefecto = 1;
+    private const int AdicionSalud = 10;
 
     // --- SERIALIZED ---
     [Header("Ataques")]
@@ -38,31 +41,43 @@ public class CrashtianScript : MonoBehaviour, IDanable, IVerificadorTrace
     // --- PRIVADAS ---
     private GameObject _jugador;
     private float _proximoAtaque;
-    private int _salud = 10;
-    private int _saludMaxima ;
+    private int _salud = 20;
+    private int _saludMaxima;
     private bool _modoPuzzleActivo = false;
-    private string _traceCorrectoIndex = "1";
+    private string _traceCorrectoIndex = TraceCorrectoPorDefecto.ToString();
     private Coroutine _rutinaAtaque;
 
-    // --- UNITY EVENTS ---
     private void Start()
     {
-        _saludMaxima = _salud;
-        _jugador = GameObject.FindGameObjectWithTag("Player");
-        DesactivarTraces();
-        IniciarAtaques();
+        try
+        {
+            _saludMaxima = _salud;
+            _jugador = GameObject.FindGameObjectWithTag("Player");
+            DesactivarTraces();
+            IniciarAtaques();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[CrashtianScript] Error en Start: {e.Message}", this);
+        }
     }
 
     private void Update()
     {
-        if (_jugador != null)
+        try
         {
-            Vector3 direccion = (_jugador.transform.position - transform.position).normalized;
-            transform.localScale = new Vector3(direccion.x >= 0 ? 1f : -1f, 1f, 1f);
+            if (_jugador != null)
+            {
+                Vector3 direccion = (_jugador.transform.position - transform.position).normalized;
+                transform.localScale = new Vector3(direccion.x >= 0 ? 1f : -1f, 1f, 1f);
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[CrashtianScript] Error en Update: {e.Message}", this);
         }
     }
 
-    // --- ATAQUES ---
     private void IniciarAtaques()
     {
         if (_rutinaAtaque == null)
@@ -93,39 +108,63 @@ public class CrashtianScript : MonoBehaviour, IDanable, IVerificadorTrace
 
     private void EjecutarAtaqueAleatorio()
     {
-        TipoAtaque ataque = (TipoAtaque)Random.Range(0, 3);
-        switch (ataque)
+        try
         {
-            case TipoAtaque.Estalactitas:
-                StartCoroutine(AtaqueEstalactitas());
-                break;
-            case TipoAtaque.DisparoGrande:
-                AtaqueDisparoGrande();
-                break;
-            case TipoAtaque.Chorros:
-                StartCoroutine(LanzarChorroDesdeSuelo());
-                break;
+            TipoAtaque ataque = (TipoAtaque)Random.Range(0, 3);
+            switch (ataque)
+            {
+                case TipoAtaque.Estalactitas:
+                    StartCoroutine(AtaqueEstalactitas());
+                    break;
+                case TipoAtaque.DisparoGrande:
+                    AtaqueDisparoGrande();
+                    break;
+                case TipoAtaque.Chorros:
+                    StartCoroutine(LanzarChorroDesdeSuelo());
+                    break;
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[CrashtianScript] Error ejecutando ataque: {e.Message}", this);
         }
     }
 
     private IEnumerator AtaqueEstalactitas()
     {
-        List<int> orden = Enumerable.Range(0, puntosEstalactitas.Length)
-                                    .OrderBy(_ => Random.value)
-                                    .ToList();
+        List<int> orden = Enumerable.Range(0, puntosEstalactitas.Length).OrderBy(_ => Random.value).ToList();
 
         foreach (int i in orden)
         {
-            var punto = puntosEstalactitas[i];
-            GameObject estalactita = Instantiate(estalactitaPrefab, punto.position, Quaternion.Euler(0, 0, 180f));
-            estalactita.GetComponent<Estalactita>()?.CaerLuegoDe(1.2f);
-            yield return new WaitForSeconds(Random.Range(0.2f, 0.5f));
+            Transform punto = puntosEstalactitas[i];
+            try
+            {
+                GameObject estalactita = Instantiate(estalactitaPrefab, punto.position, Quaternion.Euler(0, 0, 180f));
+                Estalactita estalactitaScript = estalactita.GetComponent<Estalactita>();
+                if (estalactitaScript != null)
+                {
+                    estalactitaScript.CaerLuegoDe(RetrasoCaidaEstalactita);
+                }
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"[CrashtianScript] Error instanciando estalactita: {e.Message}", this);
+            }
+
+            yield return new WaitForSeconds(Random.Range(MinEsperaEstalactita, MaxEsperaEstalactita));
         }
     }
 
     private void AtaqueDisparoGrande()
     {
-        Instantiate(disparoGrandePrefab, puntoDisparo.position, Quaternion.identity);
+        try
+        {
+            Instantiate(disparoGrandePrefab, puntoDisparo.position, Quaternion.identity);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[CrashtianScript] Error disparo grande: {e.Message}", this);
+        }
     }
 
     private IEnumerator LanzarChorroDesdeSuelo()
@@ -139,22 +178,42 @@ public class CrashtianScript : MonoBehaviour, IDanable, IVerificadorTrace
     private IEnumerator MostrarIndicadorYEjecutarChorros(Transform punto)
     {
         if (indicadorPrefab != null)
-            Destroy(Instantiate(indicadorPrefab, punto.position, Quaternion.identity), TiempoAviso);
+        {
+            try
+            {
+                GameObject indicador = Instantiate(indicadorPrefab, punto.position, Quaternion.identity);
+                Destroy(indicador, TiempoAviso);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning($"[CrashtianScript] Error mostrando indicador: {e.Message}", this);
+            }
+        }
 
         yield return new WaitForSeconds(TiempoAviso);
 
-        for (int i = 1; i <= 5; i++)
+        for (int i = 1; i <= CantidadDisparosChorro; i++)
         {
-            GameObject chorro = Instantiate(chorroPrefab, punto.position, Quaternion.identity);
-            float angulo = i * 30f;
-            float rad = angulo * Mathf.Deg2Rad;
-            Vector2 direccion = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
-            chorro.GetComponent<ChorroDisparo>()?.Inicializar(direccion, 1.3f);
-            yield return new WaitForSeconds(0.2f);
+            try
+            {
+                GameObject chorro = Instantiate(chorroPrefab, punto.position, Quaternion.identity);
+                float angulo = i * AnguloBaseChorro;
+                float rad = angulo * Mathf.Deg2Rad;
+                Vector2 direccion = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+                ChorroDisparo script = chorro.GetComponent<ChorroDisparo>();
+                if (script != null)
+                {
+                    script.Inicializar(direccion, FuerzaDisparoChorro);
+                }
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"[CrashtianScript] Error lanzando chorro: {e.Message}", this);
+            }
+            yield return new WaitForSeconds(EsperaEntreDisparosChorro);
         }
     }
 
-    // --- VIDA / TRACES ---
     public void Golpe()
     {
         RecibirDano();
@@ -169,7 +228,7 @@ public class CrashtianScript : MonoBehaviour, IDanable, IVerificadorTrace
         if (_salud <= UmbralVidaPuzzle && !_modoPuzzleActivo)
         {
             IniciarModoPuzzle();
-            AsignarTraceCorrecto(1); // config predeterminada
+            AsignarTraceCorrecto(TraceCorrectoPorDefecto);
             return;
         }
 
@@ -184,14 +243,20 @@ public class CrashtianScript : MonoBehaviour, IDanable, IVerificadorTrace
         _modoPuzzleActivo = true;
         DetenerAtaques();
 
-        foreach (var trace in traceOpciones)
-            trace.SetActive(true);
+        foreach (GameObject trace in traceOpciones)
+        {
+            try { trace.SetActive(true); }
+            catch { Debug.LogWarning("[CrashtianScript] Trace no válido"); }
+        }
     }
 
     private void DesactivarTraces()
     {
-        foreach (var trace in traceOpciones)
-            trace.SetActive(false);
+        foreach (GameObject trace in traceOpciones)
+        {
+            try { trace.SetActive(false); }
+            catch { Debug.LogWarning("[CrashtianScript] Trace inválido en desactivación"); }
+        }
 
         if (portalSiguienteNivel != null)
             portalSiguienteNivel.SetActive(false);
@@ -209,8 +274,8 @@ public class CrashtianScript : MonoBehaviour, IDanable, IVerificadorTrace
         else
         {
             Debug.Log("Incorrecto. El jefe recupera vida.");
-            _salud = Mathf.Min(_salud + 3, _saludMaxima);
-            _modoPuzzleActivo = false;
+            _salud += AdicionSalud;
+             _modoPuzzleActivo = false;
             DesactivarTraces();
             IniciarAtaques();
         }

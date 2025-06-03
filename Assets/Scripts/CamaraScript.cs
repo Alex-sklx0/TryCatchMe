@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,25 +7,37 @@ public class CamaraController : MonoBehaviour
 {
     public Transform cristian;
     private const float velocidadCamara = 0.025f;
+    private const float PosicionInicialZ = -10f;
+
 
     // Ajusta este valor para que la cámara esté más arriba del jugador
     public Vector3 desplazamiento = new Vector3();
 
     private void LateUpdate()
     {
-        if (cristian == null) return;
+        try
+        {
+            if (cristian == null)
+            {
+                Debug.LogWarning("[CamaraController] No se asignó el transform de Cristian.");
+                return;
+            }
 
-        // Calcula la posición deseada con el desplazamiento del personaje
-        Vector3 posicionDeseada = cristian.position + desplazamiento;
+            // Calcular la posición deseada con desplazamiento
+            Vector3 posicionDeseada = cristian.position + desplazamiento;
 
-        // forzar siempre el eje Z a -10 para que la camara capte todo el plano
-        posicionDeseada.z = -10f;
+            // Forzar Z a -10 para mantener la cámara en 2D
+            posicionDeseada.z = PosicionInicialZ;
 
-        // Suavizar el movimiento de la cámara
-        Vector3 posicionSuavizada = Vector3.Lerp(transform.position, posicionDeseada, velocidadCamara);
+            // Suavizar el movimiento
+            Vector3 posicionSuavizada = Vector3.Lerp(transform.position, posicionDeseada, velocidadCamara);
 
-        // Aplicar la posición suavizada
-        transform.position = posicionSuavizada;
+            // Aplicar la nueva posición
+            transform.position = posicionSuavizada;
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[CamaraController] Error en LateUpdate: {e.Message}", this);
+        }
     }
 }
-

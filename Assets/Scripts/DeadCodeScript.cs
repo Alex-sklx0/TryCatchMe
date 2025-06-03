@@ -2,114 +2,162 @@ using UnityEngine;
 
 public class DeadCode : MonoBehaviour, IDanable
 {
-    //constantes
+    // CONSTANTES 
     private const float Velocidad = 0.3f;
     private const float RadioMovimiento = 0.43f;
     private const float DistanciaAutodestruccion = 0.2f;
     private const float DanoPorAutodestruccion = 0.5f;
-    private const float FactorRalentizacion = 0.5f; //porcentaje que va a reducir la velocidad del jugador
-    private const float DuracionRalentizacion = 3f; //3 segundos
-    private const float ConstanteGiroSprite = 1f; //constante para cuando se gira el srite en direccion y,z
+    private const float FactorRalentizacion = 0.5f;
+    private const float DuracionRalentizacion = 3f;
+    private const float ConstanteGiroSprite = 1f;
     private const int SaludMin = 0;
+    private static readonly Color ColorRojoTransparente = new Color(1f, 0f, 0f, 0.4f);
+    private const float TiempoDestruccionInmediato = 0f;
 
-
-    //serializados y variables publicos 
-    [SerializeField] private Transform _cristianPosicion; //SerializeField para que se pueda encapsular y aun así mostrar en el inspector de unity
-
+    //  SERIALIZED y publicos
+    [SerializeField] private Transform _cristianPosicion;
     public AudioClip sonido;
     public AudioClip sonidoExplosion;
 
-    //variables privados
+    // PRIVADAS 
     private CristianMovimiento _cristianScript;
     private Rigidbody2D _rigidbody2D;
     private Vector2 _direccionMovimiento;
     private int _salud = 3;
     private bool _jugadorDetectado = false;
 
-
-
     private void Start()
     {
-        // Obtener el Rigidbody2D del GameObject
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        try
+        {
+            _rigidbody2D = GetComponent<Rigidbody2D>();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error al obtener Rigidbody2D: {e.Message}", this);
+        }
 
-        // Verificar si el Transform del jugador (Cristian) fue asignado en el Inspector
         if (_cristianPosicion == null)
         {
-            Debug.LogError("No se asignó la posición de Cristian (Transform).");
+            Debug.LogError("No se asignó la posición de Cristian (Transform).", this);
             return;
         }
 
-        // Usar operador de coalescencia nula para intentar obtener el componente y reportar errores
-        _cristianScript = _cristianPosicion.GetComponent<CristianMovimiento>();
-
-        if (_cristianScript == null)
+        try
         {
-            Debug.LogError($"No se encontró el componente CristianMovimiento en el objeto {_cristianPosicion.name}.");
+            _cristianScript = _cristianPosicion.GetComponent<CristianMovimiento>();
+            if (_cristianScript == null)
+                Debug.LogError($"No se encontró CristianMovimiento en {_cristianPosicion.name}", this);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error al obtener CristianMovimiento: {e.Message}", this);
         }
     }
 
-
     private void Update()
     {
-        //verificar en cada frame si cristian existe en la escena
         if (_cristianPosicion == null) return;
-        //distancia del jugador en cada frame
-        float distanciaAlJugador = Vector2.Distance(transform.position, _cristianPosicion.position);
 
-        //Activar movimiento si el jugador entra en el radio de deteccion
+        float distanciaAlJugador = Vector2.Distance(transform.position, _cristianPosicion.position);
         _jugadorDetectado = distanciaAlJugador <= RadioMovimiento;
 
         if (_jugadorDetectado)
         {
-            
-            ActualizarOrientacion();
-            // Verificar distancia para autodestrucción
-            if (distanciaAlJugador <= DistanciaAutodestruccion)
+            try
             {
-                //aplicar metodo realentizador a cristian y autodestruirse
-                _cristianScript.AplicarRalentizacion(FactorRalentizacion, DuracionRalentizacion);
-                Autodestruir();
+                ActualizarOrientacion();
+
+                if (distanciaAlJugador <= DistanciaAutodestruccion)
+                {
+                    _cristianScript?.AplicarRalentizacion(FactorRalentizacion, DuracionRalentizacion);
+                    Autodestruir();
+                }
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error durante detección o orientación: {e.Message}", this);
             }
         }
-        else _direccionMovimiento = Vector2.zero; // No moverse si no detecta a cristian
-
+        else
+        {
+            _direccionMovimiento = Vector2.zero;
+        }
     }
 
     private void FixedUpdate()
     {
         if (_cristianPosicion == null) return;
-        //moverse hacia cristian
-        _rigidbody2D.linearVelocity = _direccionMovimiento * Velocidad;
+
+        try
+        {
+            _rigidbody2D.linearVelocity = _direccionMovimiento * Velocidad;
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error durante movimiento: {e.Message}", this);
+        }
     }
+
     private void ActualizarOrientacion()
     {
-        //direccion de movimiento en base a la posicion de cristian
-
-        _direccionMovimiento = (_cristianPosicion.position - transform.position).normalized;
-        // Girar el sprite en direccion a cristian
-
-        transform.localScale = new Vector3(Mathf.Sign(_direccionMovimiento.x), ConstanteGiroSprite, ConstanteGiroSprite);
+        try
+        {
+            _direccionMovimiento = (_cristianPosicion.position - transform.position).normalized;
+            float direccionX = Mathf.Sign(_direccionMovimiento.x);
+            transform.localScale = new Vector3(direccionX, ConstanteGiroSprite, ConstanteGiroSprite);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error al actualizar orientación: {e.Message}", this);
+        }
     }
+
     private void Autodestruir()
     {
-        _cristianScript.Golpe(DanoPorAutodestruccion);//aplicar dano a cristian
-        Destroy(gameObject); //destruir con tiempo para aplciar la animacion
+        try
+        {
+            _cristianScript?.Golpe(DanoPorAutodestruccion);
+            Destroy(gameObject, TiempoDestruccionInmediato);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error al autodestruir: {e.Message}", this);
+        }
     }
+
     private void RecibirDano()
     {
         _salud--;
-        if (_salud <= SaludMin) Destroy(gameObject);//destruir con tiempo para aplciar la animacion } // Método público que llama al privado  
+
+        if (_salud <= SaludMin)
+        {
+            try
+            {
+                Destroy(gameObject);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error al destruir objeto por daño: {e.Message}", this);
+            }
+        }
     }
+
     public void Golpe()
     {
-        RecibirDano();
-
+        try
+        {
+            RecibirDano();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error al recibir daño: {e.Message}", this);
+        }
     }
+
     private void OnDrawGizmosSelected()
     {
-        // Color del radio de ataque (rojo transparente)
-        Gizmos.color = new Color(1, 0, 0, 0.4f);
+        Gizmos.color = ColorRojoTransparente;
         Gizmos.DrawWireSphere(transform.position, RadioMovimiento);
     }
 }
