@@ -1,35 +1,52 @@
 using UnityEngine;
 
-public class DisparoHieloScript : MonoBehaviour
-{    private CristianMovimiento _cristian;
- private const float _factorRalentizacion=0.5f; 
-    private const float _duracionRalentizacion = 3f; 
-    public Vector3 Direccion { get; set; }
-    public float velocidad = 5f;
-    public float _dano = 0.75f;
+public class DisparoHielo : MonoBehaviour
+{
+
+    //constantes
+    private const float FactorRalentizacion=0.5f; 
+    private const float DuracionRalentizacion = 3f; 
+    private const float Velocidad = 0.3f;
+    private const float Dano = 0.75f;
+    //variables privadas
+    private CristianMovimiento _cristianScript;
+    private Vector3 _direccion;
+
+    public Vector3 Direccion
+    {
+        set
+        {
+            _direccion = value;
+        }
+        get
+        {
+            return _direccion;
+        }
+    }
 
     void Update()
     {
-        transform.position += Direccion * velocidad * Time.deltaTime;
+        transform.position += Direccion * Velocidad * Time.deltaTime;
+    }
+      public void DestruirDisparo()
+    {
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-{
-    if (collision.CompareTag("Player"))
     {
-        _cristian = collision.GetComponent<CristianMovimiento>();
-
-        if (_cristian != null)
+        if (collision.TryGetComponent(out _cristianScript))
         {
-            _cristian.AplicarRalentizacion(_factorRalentizacion, _duracionRalentizacion);
-            _cristian.Golpe(_dano); 
+            _cristianScript.AplicarRalentizacion(FactorRalentizacion, DuracionRalentizacion);
+            _cristianScript.Golpe(Dano);
+            DestruirDisparo();
         }
 
-        Destroy(gameObject);
-    }
-    
-        Destroy(gameObject);
-    
-}
+        else if (!collision.isTrigger || collision.CompareTag("Disparo"))
+        {
+            DestruirDisparo();
+        }
+            }
 
 }
+

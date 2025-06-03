@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8364097546403590843}
   - component: {fileID: 8324098343223744725}
   - component: {fileID: 8811640513830012484}
-  - component: {fileID: 2414577974963714933}
+  - component: {fileID: 8336294059899514303}
   m_Layer: 0
   m_Name: explosionTecho
   m_TagString: Untagged
@@ -154,7 +154,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0009172559, y: 0.012408644}
   m_Size: {x: 0.21905112, y: 0.768}
   m_Direction: 0
---- !u!114 &2414577974963714933
+--- !u!114 &8336294059899514303
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,9 +163,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7836197117073205105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17c9ba36fc1d13746941171ec90c2bdc, type: 3}
+  m_Script: {fileID: 11500000, guid: 179a16bd9947140429326cf81a76c1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duracion: 1
-  radio: 0.2
-  dano: 1

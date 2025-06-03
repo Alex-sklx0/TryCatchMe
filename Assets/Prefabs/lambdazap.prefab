@@ -166,9 +166,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c427a3b1b243b24fa972890b6cb324c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayoPrefab: {fileID: 5146797735074318251, guid: 8377db9349242c0489f336cdd0f05209, type: 3}
-  anguloEntreRayos: 23
-  fuerzaRayo: 0.2
-  intervaloDisparo: 4
-  jugador: {fileID: 0}
-  rangoDeteccion: 8
+  _rayoPrefab: {fileID: 5146797735074318251, guid: 8377db9349242c0489f336cdd0f05209, type: 3}
+  _cristianPosicion: {fileID: 665587821825486448, guid: bdbcf2fa5e91cc7479476a0a013460de, type: 3}

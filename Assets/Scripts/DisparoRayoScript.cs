@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DisparoRayoScript : MonoBehaviour
 {
-    private const float Velocidad = 0.4f;
+    private const float Velocidad = 0.3f;
     private const float Dano = 1f;
-    private const int TiempoVida = 4;
+    private const float TiempoVida = 0.5f;
     private const string TagJugador = "Player";
 
     [SerializeField] private AudioClip sonido;
@@ -38,7 +38,7 @@ public class DisparoRayoScript : MonoBehaviour
         _rigidbody2D.linearVelocity = _direccion * Velocidad;
     }
 
-    private void Autodestruir(int TiempoVida)
+    private void Autodestruir(float TiempoVida)
     {
         Destroy(gameObject, TiempoVida); //se destruye el objeto despues de un tiempo
 

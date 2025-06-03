@@ -1,13 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class LambdazapScript : MonoBehaviour, IDanable
+public class Lambdazap : MonoBehaviour, IDanable
 {
     //constantes
     private const int anguloEntreRayos = 23; // Ángulo entre cada rayo
     private const float intervaloDisparo = 2; // Tiempo entre ráfagas
-    private const float rangoDeteccion = 0.35f;
     private const int SaludMin = 0;
+    public const float RadioDeteccion = 0.35f;
+
 
     private const float ConstanteEjeSprite = 1f; //constante para cuando se gira el srite en direccion y,z
     private const int AnguloCompleto = 360;
@@ -31,18 +32,18 @@ public class LambdazapScript : MonoBehaviour, IDanable
 
 
     }
- private void ActualizarOrientacion()
+    private void ActualizarOrientacion()
     {
         _direccionMovimiento = (_cristianPosicion.position - transform.position).normalized;
-            transform.localScale = new Vector3(Mathf.Sign(_direccionMovimiento.x), ConstanteEjeSprite, ConstanteEjeSprite);
+        transform.localScale = new Vector3(Mathf.Sign(_direccionMovimiento.x), ConstanteEjeSprite, ConstanteEjeSprite);
     }
     private bool JugadorEnRango()
-{
-    if (_cristianPosicion == null) return false;
+    {
+        if (_cristianPosicion == null) return false;
 
-    float distancia = Vector2.Distance(transform.position, _cristianPosicion.position);
-    return distancia <= rangoDeteccion;
-}
+        float distancia = Vector2.Distance(transform.position, _cristianPosicion.position);
+        return distancia <= RadioDeteccion;
+    }
 
     private void ControlarDisparo()
     {
@@ -51,31 +52,31 @@ public class LambdazapScript : MonoBehaviour, IDanable
             StartCoroutine(DispararRayosSecuencial());
             _proximoDisparo = Time.time + intervaloDisparo;
         }
-}
-private IEnumerator DispararRayosSecuencial()
-{
-    _disparando = true;
-
-    for (int angulo = AnguloMinimo; angulo < AnguloCompleto; angulo += anguloEntreRayos)
+    }
+    private IEnumerator DispararRayosSecuencial()
     {
-        float radianes = angulo * Mathf.Deg2Rad;
-        Vector2 direccion = new Vector2(Mathf.Cos(radianes), Mathf.Sin(radianes)).normalized;
+        _disparando = true;
 
-        GameObject rayo = Instantiate(_rayoPrefab, transform.position, Quaternion.identity);
-        DisparoRayoScript rayoScript = rayo.GetComponent<DisparoRayoScript>();
-        if (rayoScript != null)
+        for (int angulo = AnguloMinimo; angulo < AnguloCompleto; angulo += anguloEntreRayos)
         {
-            rayoScript.Direccion = direccion;
+            float radianes = angulo * Mathf.Deg2Rad;
+            Vector2 direccion = new Vector2(Mathf.Cos(radianes), Mathf.Sin(radianes)).normalized;
+
+            GameObject rayo = Instantiate(_rayoPrefab, transform.position, Quaternion.identity);
+            DisparoRayoScript rayoScript = rayo.GetComponent<DisparoRayoScript>();
+            if (rayoScript != null)
+            {
+                rayoScript.Direccion = direccion;
+            }
+
+            rayo.transform.rotation = Quaternion.Euler(0, 0, angulo);
+            yield return new WaitForSeconds(0.1f);
         }
 
-        rayo.transform.rotation = Quaternion.Euler(0, 0, angulo);
-        yield return new WaitForSeconds(0.1f);
+        _disparando = false;
     }
 
-    _disparando = false;
-}
-
-     private void RecibirDano()
+    private void RecibirDano()
     {
         _salud--;
         if (_salud <= SaludMin) Destroy(gameObject);//destruir con tiempo para aplciar la animacion } // Método público que llama al privado  
@@ -85,4 +86,11 @@ private IEnumerator DispararRayosSecuencial()
         RecibirDano();
 
     }
+  void OnDrawGizmosSelected()
+    {
+        // Color del radio de ataque (rojo transparente)
+        Gizmos.color = new Color(1, 0, 0, 0.4f);
+        Gizmos.DrawWireSphere(transform.position, RadioDeteccion);
+    }
 }
+

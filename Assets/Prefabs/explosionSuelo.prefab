@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7491847512787312083}
   - component: {fileID: 1312620248734251087}
   - component: {fileID: 5082948916699849820}
-  - component: {fileID: 5129374075127624289}
+  - component: {fileID: 4511933225615818811}
   m_Layer: 0
   m_Name: explosionSuelo
   m_TagString: Untagged
@@ -154,7 +154,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0009172559, y: 0.012408644}
   m_Size: {x: 0.21905112, y: 0.768}
   m_Direction: 0
---- !u!114 &5129374075127624289
+--- !u!114 &4511933225615818811
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,9 +163,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5891681768225150468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17c9ba36fc1d13746941171ec90c2bdc, type: 3}
+  m_Script: {fileID: 11500000, guid: 179a16bd9947140429326cf81a76c1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duracion: 1
-  radio: 0.2
-  dano: 1

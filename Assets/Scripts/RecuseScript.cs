@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RecurseScript : MonoBehaviour
+public class Recurse : MonoBehaviour
 {
     public float radioDeteccion ;
     public float velocidad ;

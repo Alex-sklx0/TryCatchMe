@@ -166,10 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ea0bbee0b6bd345ad085ad944092ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cristian: {fileID: 0}
-  velocidad: 0.3
-  distanciaAutodestruccion: 0.2
-  danoPorAutodestruccion: 0.5
+  _cristianPosicion: {fileID: 665587821825486448, guid: bdbcf2fa5e91cc7479476a0a013460de, type: 3}
   sonido: {fileID: 0}
   sonidoExplosion: {fileID: 0}
-  radioDeDeteccion: 0.43

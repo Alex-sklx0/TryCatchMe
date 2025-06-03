@@ -37,7 +37,7 @@ public class Nullie : MonoBehaviour, IDanable
 
 
 
-    public void Start()
+    private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -57,7 +57,7 @@ public class Nullie : MonoBehaviour, IDanable
         }
     }
 
-    public void Update()
+    private void Update()
     {
 
 
@@ -89,7 +89,7 @@ public class Nullie : MonoBehaviour, IDanable
             _rigidbody2D.linearVelocity = Vector2.zero;
         }
     }
-    public void FixedUpdate()
+    private void FixedUpdate()
     {
         if (_cristianPosicion == null) return;
         //moverse hacia cristian
@@ -133,7 +133,7 @@ public class Nullie : MonoBehaviour, IDanable
         _puedeBloquear = true;
     }
 
-    void PlaySound(AudioClip clip)
+    private void PlaySound(AudioClip clip)
     {
         if (Camera.main != null)
         {

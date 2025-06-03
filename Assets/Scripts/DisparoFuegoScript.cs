@@ -1,32 +1,41 @@
 using UnityEngine;
 
-public class DisparoFuegoScript : MonoBehaviour
+public class DisparoFuego : MonoBehaviour
 {
-    public Vector3 Direccion { get; set; }
-    public float velocidad = 5f;
-    public float danoBase = 1f;
-
+    public const float Velocidad = 0.3f;
+    private const float Dano = 1.25f;
+    private CristianMovimiento _cristianScript;
+    private Vector3 _direccion;
+    public Vector3 Direccion
+    {
+        set
+        {
+            _direccion = value;
+        }
+        get
+        {
+            return _direccion;
+        }
+    }
     void Update()
     {
-        transform.position += Direccion * velocidad * Time.deltaTime;
+        transform.position += Direccion * Velocidad * Time.deltaTime;
+    }
+    public void DestruirDisparo()
+    {
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.TryGetComponent(out _cristianScript))
         {
-            CristianMovimiento cristian = collision.GetComponent<CristianMovimiento>();
-            if (cristian != null)
-            {
-                float danoFinal = danoBase * 1.25f;
-                cristian.Golpe(danoFinal); // Asegúrate de que este método acepte `float`
-            }
-
-            Destroy(gameObject);
+            _cristianScript.Golpe(Dano);
+            DestruirDisparo();
         }
         else if (!collision.isTrigger)
         {
-            Destroy(gameObject);
+            DestruirDisparo();
         }
     }
 }

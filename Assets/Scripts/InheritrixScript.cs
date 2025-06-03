@@ -2,63 +2,86 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InheritrixScript : MonoBehaviour
+public class Inheritrix : MonoBehaviour, IDanable
 {   
-public GameObject disparoPrefab;         // Bala normal
-public GameObject disparoHieloPrefab;    // Bala de hielo
-public GameObject disparoFuegoPrefab;    // Bala de fuego
-    public Transform cristian;
+    private const float TiempoEntreDisparos = 1.25f;
+    private const float RangoDisparo = 1f;
+    private const float ConstanteEjeSprite = 1f; //constante para cuando se gira el srite en direccion y,z
+
+    private const float ConstanteDireccionDisparo = 0.0f; //constante para cuando genera un disparo en direccion y,z
+    private const float ConstanteHorizontalDisparo = 0.12f; //constante para cuando genera un disparo en direccion y,z
+
+    private const int SaludMin = 0;
+
+    [SerializeField] private GameObject _disparoPrefab;         // Bala normal
+    [SerializeField] private GameObject _disparoHieloPrefab;    // Bala de hielo
+    [SerializeField] private GameObject _disparoFuegoPrefab;    // Bala de fuego
+    [SerializeField] private Transform _cristianPosicion;           // Referencia al jugador (asignable desde el inspector)
 
     private int _salud = 3;
     private float _ultimoTiro;
+    private Vector2 _direccionMovimiento;
+
 
     void Update()
     {
-        if (cristian == null) return;
+        if (_cristianPosicion == null) return;
+        ActualizarOrientacion();
+        ControlarDisparo();
+    }
+   private void ActualizarOrientacion()
+    {
+            _direccionMovimiento = (_cristianPosicion.position - transform.position).normalized;
+            transform.localScale = new Vector3(Mathf.Sign(_direccionMovimiento.x), ConstanteEjeSprite, ConstanteEjeSprite);
+    }
+    private void ControlarDisparo()
+    {
+        float distanciaAlJugador = Vector3.Distance(_cristianPosicion.position, transform.position);
 
-        Vector3 direccion = cristian.position - transform.position;
-        if (direccion.x >= 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        else transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-
-        float distancia = Mathf.Abs(cristian.position.x - transform.position.x);
-
-        if (distancia < 1.0f && Time.time > _ultimoTiro + 1.25f) //*!Error al disparar
+        // Disparar si esta cerca y ha pasado suficiente tiempo
+        if (distanciaAlJugador <= RangoDisparo && Time.time > _ultimoTiro + TiempoEntreDisparos) 
         {
             Disparo();
             _ultimoTiro = Time.time;
         }
     }
-    
+
 private void Disparo()
-{
-    Vector3 direccion = new Vector3(transform.localScale.x, 0.0f, 0.0f);
-    Vector3 posicionDisparo = transform.position + direccion * 0.12f;
-
-    int tipoDisparo = Random.Range(1, 4); // Número aleatorio entre 1 y 3
-
-    GameObject disparo = null;
-
-    switch (tipoDisparo)
     {
-        case 1:
-            disparo = Instantiate(disparoPrefab, posicionDisparo, Quaternion.identity);
-            disparo.GetComponent<DisparoGetterGoblin>().Direccion = direccion;
-            break;
-        case 2:
-            disparo = Instantiate(disparoHieloPrefab, posicionDisparo, Quaternion.identity);
-            disparo.GetComponent<DisparoHieloScript>().Direccion = direccion;
-            break;
-        case 3:
-            disparo = Instantiate(disparoFuegoPrefab, posicionDisparo, Quaternion.identity);
-            disparo.GetComponent<DisparoFuegoScript>().Direccion = direccion;
-            break;
+        Vector3 direccion = new Vector3(transform.localScale.x, ConstanteDireccionDisparo, ConstanteDireccionDisparo);
+        Vector3 posicionDisparo = transform.position + direccion * ConstanteHorizontalDisparo;
+
+        int tipoDisparo = Random.Range(1, 4); // Número aleatorio entre 1 y 3 (1=normal, 2=hielo, 3=fuego)
+
+        GameObject disparo = null;
+
+        switch (tipoDisparo)
+        {
+            case 1:
+                disparo = Instantiate(_disparoPrefab, posicionDisparo, Quaternion.identity);
+                disparo.GetComponent<DisparoGetterGoblin>().Direccion = direccion;
+                break;
+            case 2:
+                disparo = Instantiate(_disparoHieloPrefab, posicionDisparo, Quaternion.identity);
+                disparo.GetComponent<DisparoHielo>().Direccion = direccion;
+                break;
+            case 3:
+                disparo = Instantiate(_disparoFuegoPrefab, posicionDisparo, Quaternion.identity);
+                disparo.GetComponent<DisparoFuego>().Direccion = direccion;
+                break;
+        }
     }
-}
 
 
+   
+  private void RecibirDano()
+    {
+        _salud--;
+        if (_salud <= SaludMin) Destroy(gameObject);//destruir con tiempo para aplciar la animacion } // Método público que llama al privado  
+    }
     public void Golpe()
     {
-        _salud --;
-        if (_salud <= 0) Destroy(gameObject);
+        RecibirDano();
+
     }
 }

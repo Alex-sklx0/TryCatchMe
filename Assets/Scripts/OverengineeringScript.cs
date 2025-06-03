@@ -1,92 +1,112 @@
 using UnityEngine;
 
-public class OverengineeringScript : MonoBehaviour
+public class OverengineeringScript : MonoBehaviour, IDanable
 {
-    public float velocidad ;
-    public float radioAtaque;
-    public float tiempoEntreAtaques = 2f;
-    private float _dano = 1f;
-    private float _salud = 8;
-    private float tiempoAtaqueActual = 0f;
-    private Transform objetivo;
-    private Rigidbody2D rb;
-    private Animator anim;
+    // Constantes
+    private const float Velocidad = 0.3f;
+    private const float RadioAtaque = 0.25f;
+    private const float RadioMovimiento = 0.8f;
+    private const float TiempoEntreAtaques = 2f;
+    private const float Dano = 1f;
+    private const float ConstanteGiroSprite = 1f;
+    private const int SaludInicial = 8;
+    private const int SaludMinima = 0;
 
-    void Start()
+    // Componentes y referencias
+    private Transform _cristianPosicion;
+    private Rigidbody2D _rigidbody2D;
+    private Animator _animator;
+
+    // Variables privadas
+    private float _salud = SaludInicial;
+    private float _tiempoAtaqueActual;
+    private Vector2 _direccionMovimiento;
+    private bool _jugadorEnRango = false;
+
+    private void Start()
     {
         GameObject jugador = GameObject.FindWithTag("Player");
-
         if (jugador != null)
         {
-            objetivo = jugador.transform;
+            _cristianPosicion = jugador.transform;
+        }
+        else
+        {
+            Debug.LogError("No se encontró al jugador en la escena.");
         }
 
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
-    void Update()
+    private void Update()
     {
-        if (objetivo == null) return;
+        if (_cristianPosicion == null) return;
 
-        float distancia = Vector2.Distance(transform.position, objetivo.position);
+        float distancia = Vector2.Distance(transform.position, _cristianPosicion.position);
+        _jugadorEnRango = distancia <= RadioMovimiento;
 
-        // Movimiento hacia el jugador
-        Vector2 direccion = (objetivo.position - transform.position).normalized;
-        rb.MovePosition(rb.position + direccion * velocidad * Time.deltaTime);
-
-        // Si está dentro del radio de ataque, intentar atacar
-        if (distancia <= radioAtaque)
+        if (_jugadorEnRango)
         {
-            tiempoAtaqueActual -= Time.deltaTime;
-            if (tiempoAtaqueActual <= 0f)
+            ActualizarOrientacion();
+        }
+
+        if (distancia <= RadioAtaque)
+        {
+            _tiempoAtaqueActual -= Time.deltaTime;
+
+            if (_tiempoAtaqueActual <= 0f)
             {
                 Atacar();
-                tiempoAtaqueActual = tiempoEntreAtaques;
+                _tiempoAtaqueActual = TiempoEntreAtaques;
             }
 
-            if (anim) anim.SetBool("atacando", true);
+            _animator?.SetBool("atacando", true);
         }
         else
         {
-            if (anim) anim.SetBool("atacando", false);
+            _animator?.SetBool("atacando", false);
         }
-
-        // Voltear al enemigo según la posición del jugador
-        if (objetivo.position.x < transform.position.x)
-            transform.localScale = new Vector3(1, 1, 1); // mira a la derecha
-        else
-            transform.localScale = new Vector3(-1, 1, 1); // mira a la izquierda
     }
 
-    void Atacar()
+    private void FixedUpdate()
     {
-        if (anim) anim.SetTrigger("atacar");
+        if (_cristianPosicion == null || !_jugadorEnRango) return;
 
-        float distancia = Vector2.Distance(transform.position, objetivo.position);
-        if (distancia <= radioAtaque)
+        _direccionMovimiento = (_cristianPosicion.position - transform.position).normalized;
+        _rigidbody2D.MovePosition(_rigidbody2D.position + _direccionMovimiento * Velocidad * Time.fixedDeltaTime);
+    }
+
+    private void ActualizarOrientacion()
+    {
+        float direccionX = Mathf.Sign(_cristianPosicion.position.x - transform.position.x);
+        transform.localScale = new Vector3(-direccionX, ConstanteGiroSprite, ConstanteGiroSprite);
+    }
+
+    private void Atacar()
+    {
+
+        if (_cristianPosicion.TryGetComponent(out CristianMovimiento cristianScript))
         {
-            CristianMovimiento jugador = objetivo.GetComponent<CristianMovimiento>();
-            if (jugador != null)
-            {
-                jugador.Golpe(_dano); // Asegúrate de que este método exista
-            }
+            cristianScript.Golpe(Dano);
         }
     }
-    void OnDrawGizmosSelected()
-{
-    // Color del radio de ataque (rojo transparente)
-    Gizmos.color = new Color(1, 0, 0, 0.4f);
-    Gizmos.DrawWireSphere(transform.position, radioAtaque);
-}
 
-
-     public void Golpe()
+    public void Golpe()
     {
-        _salud -= 1;
-        if (_salud <= 0)
+        _salud--;
+        if (_salud <= SaludMinima)
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(1f, 0f, 0f, 0.4f); // Radio de ataque
+        Gizmos.DrawWireSphere(transform.position, RadioAtaque);
+
+        Gizmos.color = new Color(0f, 1f, 0f, 0.4f); // Radio de movimiento
+        Gizmos.DrawWireSphere(transform.position, RadioMovimiento);
     }
 }

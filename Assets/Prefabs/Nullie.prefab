@@ -165,14 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e3a1c903e324f4b82bc428ff95969b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cristian: {fileID: 0}
-  velocidad: 0.3
-  radioMovimiento: 0.5
-  distanciaActivacion: 0.15
-  "cooldownDa\xF1o": 1
-  duracionBloqueo: 3
-  tiempoEntreBloqueos: 5
-  tiempoMinimoEntreBloqueos: 2
+  _cristianPosicion: {fileID: 665587821825486448, guid: bdbcf2fa5e91cc7479476a0a013460de, type: 3}
   sonidoAdvertencia: {fileID: 0}
   sonidoBloqueo: {fileID: 0}
   "sonidoDa\xF1o": {fileID: 0}

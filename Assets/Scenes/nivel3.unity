@@ -410,6 +410,14 @@ PrefabInstance:
       propertyPath: cristian
       value: 
       objectReference: {fileID: 1236852160}
+    - target: {fileID: 5483627857874549570, guid: 9049a8933a4517c42a1933d44bc27a87, type: 3}
+      propertyPath: _rayoPrefab
+      value: 
+      objectReference: {fileID: 5146797735074318251, guid: 8377db9349242c0489f336cdd0f05209, type: 3}
+    - target: {fileID: 5483627857874549570, guid: 9049a8933a4517c42a1933d44bc27a87, type: 3}
+      propertyPath: _cristianPosicion
+      value: 
+      objectReference: {fileID: 1236852160}
     - target: {fileID: 6596264020473751337, guid: 9049a8933a4517c42a1933d44bc27a87, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.25084
@@ -731,6 +739,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3523739061359127568, guid: 467a28e203ff9804ab0b5a761b3802bf, type: 3}
+      propertyPath: _disparoPrefab
+      value: 
+      objectReference: {fileID: 3359640976619355045, guid: b818515a6c400544fbd0fb559893b8a3, type: 3}
+    - target: {fileID: 3523739061359127568, guid: 467a28e203ff9804ab0b5a761b3802bf, type: 3}
+      propertyPath: _cristianPosicion
+      value: 
+      objectReference: {fileID: 1236852160}
     - target: {fileID: 7749358601979374574, guid: 467a28e203ff9804ab0b5a761b3802bf, type: 3}
       propertyPath: m_Name
       value: logictrap (1)
@@ -1090,6 +1106,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3523739061359127568, guid: 467a28e203ff9804ab0b5a761b3802bf, type: 3}
+      propertyPath: _disparoPrefab
+      value: 
+      objectReference: {fileID: 3359640976619355045, guid: b818515a6c400544fbd0fb559893b8a3, type: 3}
+    - target: {fileID: 3523739061359127568, guid: 467a28e203ff9804ab0b5a761b3802bf, type: 3}
+      propertyPath: _cristianPosicion
+      value: 
+      objectReference: {fileID: 1236852160}
     - target: {fileID: 7749358601979374574, guid: 467a28e203ff9804ab0b5a761b3802bf, type: 3}
       propertyPath: m_Name
       value: logictrap
@@ -25299,11 +25323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb4583e191e3e442a53a9fbdf070d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 0.8
-  fuerzaSalto: 130
-  disparoPrefab: {fileID: 3450159402256386244, guid: 21e83925e371c4349acfb682eee6dfe8, type: 3}
-  spriteRenderer: {fileID: 0}
-  cooldownDisparo: 0.5
+  _disparoPrefab: {fileID: 3450159402256386244, guid: 21e83925e371c4349acfb682eee6dfe8, type: 3}
+  _animator: {fileID: 0}
 --- !u!50 &1236852158
 Rigidbody2D:
   serializedVersion: 5
@@ -25652,6 +25673,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5483627857874549570, guid: 9049a8933a4517c42a1933d44bc27a87, type: 3}
       propertyPath: cristian
+      value: 
+      objectReference: {fileID: 1236852160}
+    - target: {fileID: 5483627857874549570, guid: 9049a8933a4517c42a1933d44bc27a87, type: 3}
+      propertyPath: _rayoPrefab
+      value: 
+      objectReference: {fileID: 5146797735074318251, guid: 8377db9349242c0489f336cdd0f05209, type: 3}
+    - target: {fileID: 5483627857874549570, guid: 9049a8933a4517c42a1933d44bc27a87, type: 3}
+      propertyPath: _cristianPosicion
       value: 
       objectReference: {fileID: 1236852160}
     - target: {fileID: 6596264020473751337, guid: 9049a8933a4517c42a1933d44bc27a87, type: 3}

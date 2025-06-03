@@ -5,12 +5,14 @@ using UnityEngine;
 public class DisparoGetterGoblin : MonoBehaviour
 {
     //constantes
-    private const float _velocidad = 0.3f;
-    private const float _dano = 1f;
+    private const float Velocidad = 0.3f;
+    private const float Dano = 1f;
     //serialize y variables publicas
     [SerializeField] private AudioClip sonido;
 
     //variables privadas
+    private CristianMovimiento _cristianScript;
+
     private Rigidbody2D _rigidbody2D;
     private Vector3 _direccion;
     //propiedades
@@ -20,6 +22,10 @@ public class DisparoGetterGoblin : MonoBehaviour
         {
             _direccion = value;
 
+        }
+        get
+        {
+            return _direccion;
         }
     }
 
@@ -33,7 +39,7 @@ public class DisparoGetterGoblin : MonoBehaviour
     {
         if (_direccion != Vector3.zero)
         {
-            _rigidbody2D.linearVelocity = _direccion * _velocidad;
+        transform.position += Direccion * Velocidad * Time.deltaTime;
         }
             }
 
@@ -44,14 +50,16 @@ public class DisparoGetterGoblin : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        CristianMovimiento cristian = other.GetComponent<CristianMovimiento>();//ya que el disparo puede chocar con mas objetos que cristian
-        
-        if (cristian != null)
+        if (collision.TryGetComponent(out _cristianScript))
         {
-            cristian.Golpe(_dano);
+            _cristianScript.Golpe(Dano);
+            DestruirDisparo();
         }
-        DestruirDisparo();
+        else if (!collision.isTrigger || collision.CompareTag("Disparo"))
+        {
+            DestruirDisparo();
+        }
     }
 }

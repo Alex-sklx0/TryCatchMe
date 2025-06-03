@@ -1,27 +1,32 @@
 using UnityEngine;
+using System;
 
-public class LogicTrapScript : MonoBehaviour, IDanable
+public class LogicTrap : MonoBehaviour, IDanable
 {
     [Header("Configuración Básica")]
     //Constantes
-    public const float TiempoEntreAtaques;
-    public const float RadioDeteccion;
+    public const float TiempoEntreAtaques= 2;
+    public const float RadioDeteccion = 0.5f;
     private const string TagJugador = "Player";
+    private const float DesplazamientoDisparo = 0.12f;
+    private const float ConstanteEjeSprite = 1f; //constante para cuando se gira el srite en direccion y,z
 
-    //Privadas
+
+    //serialize y variables Publicas
+    [SerializeField] private GameObject _disparoPrefab;
+    [SerializeField] private Transform _cristianPosicion;
+
+//variables Privadas
     private int _salud = 3;
     private float _tiempoUltimoAtaque;
+    private Vector2 _direccionMovimiento;
 
-    //Publicas
-    public GameObject disparoPrefab;
-    public Transform cristian;
-
-
+    
     private void Start()
     {
         try
         {
-            cristian = GameObject.FindGameObjectWithTag(TagJugador)?.transform;
+            _cristianPosicion = GameObject.FindGameObjectWithTag(TagJugador)?.transform;
            
         }
         catch (Exception e)
@@ -34,23 +39,12 @@ public class LogicTrapScript : MonoBehaviour, IDanable
 
     private void Update()
     {
-
-        if (cristian == null) return;
-
-        Vector2 direccion = (cristian.position - transform.position).normalized;
-        if (direccion.x >= 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        else transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-
-        try
+    try
         {
-            // Verificar distancia y tiempo para atacar
-            if (Vector2.Distance(transform.position, cristian.position) <= RadioDeteccion &&
-                Time.time >= _tiempoUltimoAtaque + TiempoEntreAtaques)
-            {
-                Disparo();
-                _tiempoUltimoAtaque = Time.time;
-            }
-
+        if (_cristianPosicion == null) return;
+        ActualizarOrientacion();
+        ControlarDisparo();
+            
         }
         catch (Exception e)
         {
@@ -60,25 +54,46 @@ public class LogicTrapScript : MonoBehaviour, IDanable
 
 
     }
+    
+ private void ActualizarOrientacion()
+    {
+        _direccionMovimiento = (_cristianPosicion.position - transform.position).normalized;
+            transform.localScale = new Vector3(Mathf.Sign(_direccionMovimiento.x), ConstanteEjeSprite, ConstanteEjeSprite);
+    }
+    private void ControlarDisparo()
+    {
+        // Verificar distancia y tiempo para atacar
+            if (PuedeAtacar())
+            {
+                Disparo();
+                _tiempoUltimoAtaque = Time.time;
+            }
 
+    }
+      private bool PuedeAtacar()
+    {
+        float distancia = Vector2.Distance(transform.position, _cristianPosicion.position);
+        return distancia <= RadioDeteccion && Time.time >= _tiempoUltimoAtaque + TiempoEntreAtaques;
+    }
     private void Disparo()
     {
         Vector3 direccion = new Vector3(transform.localScale.x, 0.0f, 0.0f);
 
-        if (disparoPrefab == null) return;
+        if (_disparoPrefab == null) return;
         try
         {
-            GameObject disparo = Instantiate(disparoPrefab, transform.position + direccion * 0.12f, Quaternion.identity);
+            GameObject disparo = Instantiate(_disparoPrefab, transform.position + direccion * 0.12f, Quaternion.identity);
 
             disparo.GetComponent<DisparoCondicionalScript>().Direccion = direccion;
         }
         catch (Exception e)
         {
-            
-            Debug.LogError("Error al disparar:" + e.Message);  
+
+            Debug.LogError("Error al disparar:" + e.Message);
         }
         // Configurar dirección al jugador
     }
+    
 
     public void Golpe()
     {
@@ -90,7 +105,7 @@ public class LogicTrapScript : MonoBehaviour, IDanable
         {
             Debug.LogError("Error al recibir daño: " + e.Message);
         }
-        
+
     }
 
     private void RecibirDano()

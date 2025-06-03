@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2383bdefe8a318243b761eac1e1edcab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disparoPrefab: {fileID: 1017764184821391685, guid: 2912b7c555a2e004d8d22ada226b73fa, type: 3}
-  disparoHieloPrefab: {fileID: 6412695502616605532, guid: cea604e89b22e014fbd203d2cee6f7ff, type: 3}
-  disparoFuegoPrefab: {fileID: 3108795359427523847, guid: d099db6a499857e46bd1b319504dd90c, type: 3}
-  cristian: {fileID: 0}
+  _disparoPrefab: {fileID: 7812912063535907133, guid: b84f9ba0f7c7d394595a99e2e6cd1f5f, type: 3}
+  _disparoHieloPrefab: {fileID: 6412695502616605532, guid: cea604e89b22e014fbd203d2cee6f7ff, type: 3}
+  _disparoFuegoPrefab: {fileID: 3108795359427523847, guid: d099db6a499857e46bd1b319504dd90c, type: 3}
+  _cristianPosicion: {fileID: 665587821825486448, guid: bdbcf2fa5e91cc7479476a0a013460de, type: 3}

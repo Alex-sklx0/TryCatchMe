@@ -3,8 +3,8 @@ using UnityEngine;
 public class DisparoPerseguidorScript : MonoBehaviour
 {
     private Transform objetivo;
-    public float velocidad ;
-    public float tiempoVida ;
+    private const float velocidad = 0.4f;
+    private const float tiempoVida = 0.4f ;
 
     public void Iniciar(Transform jugador)
     {

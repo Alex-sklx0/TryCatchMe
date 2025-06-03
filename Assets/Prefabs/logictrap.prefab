@@ -166,6 +166,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0884357e7ddee4942a6985aa9fe6cf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiempoEntreAtaques: 2
-  _rangoDeteccion: 0.8
-  disparoPrefab: {fileID: 3359640976619355045, guid: b818515a6c400544fbd0fb559893b8a3, type: 3}
+  _disparoPrefab: {fileID: 3359640976619355045, guid: b818515a6c400544fbd0fb559893b8a3, type: 3}
+  _cristianPosicion: {fileID: 665587821825486448, guid: bdbcf2fa5e91cc7479476a0a013460de, type: 3}
