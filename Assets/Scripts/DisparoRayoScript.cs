@@ -6,7 +6,7 @@ public class DisparoRayoScript : MonoBehaviour
 {
     private const float Velocidad = 0.3f;
     private const float Dano = 1f;
-    private const float TiempoVida = 0.5f;
+    private const float TiempoVida = 0.6f;
     private const string TagJugador = "Player";
 
     [SerializeField] private AudioClip sonido;

@@ -1,0 +1,308 @@
+fileFormatVersion: 2
+guid: 122f5d6d0bcc786419e1efde41d202e0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3977108571086691779
+    second: portalFinal_0
+  - first:
+      213: 1605823414824686037
+    second: portalFinal_1
+  - first:
+      213: -6669179764574196909
+    second: portalFinal_2
+  - first:
+      213: -5703112917258418438
+    second: portalFinal_3
+  - first:
+      213: 4980800826278604371
+    second: portalFinal_4
+  - first:
+      213: -5123707714325127948
+    second: portalFinal_5
+  - first:
+      213: -2180024148632140506
+    second: portalFinal_6
+  - first:
+      213: -5232183114869738496
+    second: portalFinal_7
+  - first:
+      213: -5863574034884511565
+    second: portalFinal_8
+  - first:
+      213: -4045668169936107202
+    second: portalFinal_9
+  - first:
+      213: -3643061061282875441
+    second: portalFinal_10
+  - first:
+      213: -2789754858416150303
+    second: portalFinal_11
+  - first:
+      213: 1805031318365148779
+    second: portalFinal_12
+  - first:
+      213: -7380844688857072410
+    second: portalFinal_13
+  - first:
+      213: 6634281099385989178
+    second: portalFinal_14
+  - first:
+      213: -6814451625808819964
+    second: portalFinal_15
+  - first:
+      213: 986704043008373842
+    second: portalFinal_16
+  - first:
+      213: -6679157092063328561
+    second: portalFinal_17
+  - first:
+      213: 2066635254401786086
+    second: portalFinal_18
+  - first:
+      213: -2709113766280640510
+    second: portalFinal_19
+  - first:
+      213: 7726930144929210523
+    second: portalFinal_20
+  - first:
+      213: -5748106779329791193
+    second: portalFinal_21
+  - first:
+      213: 7770647288306901943
+    second: portalFinal_22
+  - first:
+      213: -8122763662858270380
+    second: portalFinal_23
+  - first:
+      213: -6408746720517766825
+    second: portalFinal_24
+  - first:
+      213: 5781104440633562518
+    second: portalFinal_25
+  - first:
+      213: -3643084993003211262
+    second: portalFinal_26
+  - first:
+      213: 1183581255869486630
+    second: portalFinal_27
+  - first:
+      213: -1281533547758637442
+    second: portalFinal_28
+  - first:
+      213: -5220903839419773215
+    second: portalFinal_29
+  - first:
+      213: 7411959610904621846
+    second: portalFinal_30
+  - first:
+      213: 2976419415118948954
+    second: portalFinal_31
+  - first:
+      213: 4774819546749476694
+    second: portalFinal_32
+  - first:
+      213: 725869058154213502
+    second: portalFinal_33
+  - first:
+      213: 4382551289145857370
+    second: portalFinal_34
+  - first:
+      213: -6985116690087596151
+    second: portalFinal_35
+  - first:
+      213: -3561687208538717021
+    second: portalFinal_36
+  - first:
+      213: 7415052584368989902
+    second: portalFinal_37
+  - first:
+      213: -2068057600752140102
+    second: portalFinal_38
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1000
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: portalFinal_22
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 41
+        width: 302
+        height: 446
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b3a26eb982e6db60800000000000000
+      internalID: 7770647288306901943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 023859707c879c44ea13919d9ea422ca
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      portalFinal_0: 3977108571086691779
+      portalFinal_1: 1605823414824686037
+      portalFinal_10: -3643061061282875441
+      portalFinal_11: -2789754858416150303
+      portalFinal_12: 1805031318365148779
+      portalFinal_13: -7380844688857072410
+      portalFinal_14: 6634281099385989178
+      portalFinal_15: -6814451625808819964
+      portalFinal_16: 986704043008373842
+      portalFinal_17: -6679157092063328561
+      portalFinal_18: 2066635254401786086
+      portalFinal_19: -2709113766280640510
+      portalFinal_2: -6669179764574196909
+      portalFinal_20: 7726930144929210523
+      portalFinal_21: -5748106779329791193
+      portalFinal_22: 7770647288306901943
+      portalFinal_23: -8122763662858270380
+      portalFinal_24: -6408746720517766825
+      portalFinal_25: 5781104440633562518
+      portalFinal_26: -3643084993003211262
+      portalFinal_27: 1183581255869486630
+      portalFinal_28: -1281533547758637442
+      portalFinal_29: -5220903839419773215
+      portalFinal_3: -5703112917258418438
+      portalFinal_30: 7411959610904621846
+      portalFinal_31: 2976419415118948954
+      portalFinal_32: 4774819546749476694
+      portalFinal_33: 725869058154213502
+      portalFinal_34: 4382551289145857370
+      portalFinal_35: -6985116690087596151
+      portalFinal_36: -2106014603
+      portalFinal_4: 4980800826278604371
+      portalFinal_5: -5123707714325127948
+      portalFinal_6: -2180024148632140506
+      portalFinal_7: -5232183114869738496
+      portalFinal_8: -5863574034884511565
+      portalFinal_9: -4045668169936107202
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

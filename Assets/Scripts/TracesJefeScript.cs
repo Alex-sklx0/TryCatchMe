@@ -1,16 +1,29 @@
 using UnityEngine;
 
-public class TraceInteractivo : MonoBehaviour
+public class TracesJefe : MonoBehaviour
 {
     private const string TagJugador = "Player";
 
-    [SerializeField] private SpaghettiCode jefe;
+    [SerializeField] private MonoBehaviour jefeGenerico; // cualquier script
+    private IVerificadorTrace _jefe;
+
+    private void Start()
+    {
+        _jefe = jefeGenerico as IVerificadorTrace;
+        if (_jefe == null)
+        {
+            Debug.LogError("El objeto asignado no implementa IVerificadorTrace.");
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (jefe != null && other.CompareTag(TagJugador))
-        {
-            jefe.VerificarTrace(gameObject.name); // o puedes usar un ID numérico
-        }
+        if (!other.CompareTag(TagJugador)) return;
+        _jefe?.VerificarTrace(gameObject.name);
     }
+}
+
+public interface IVerificadorTrace
+{
+    void VerificarTrace(string idSeleccionado);
 }

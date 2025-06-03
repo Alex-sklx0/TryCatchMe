@@ -112,10 +112,11 @@ public class CristianMovimiento : MonoBehaviour
         }
     }
 
-    private bool PuedeSaltar()
-    {
-        return _tocaSuelo && !_saltoBloqueado && !_atorado;
-    }
+   private bool PuedeSaltar()
+{
+    return _tocaSuelo && !_saltoBloqueado; // <-- se elimina el !_atorado
+}
+
 
     private void Saltar()
     {
@@ -203,12 +204,12 @@ public class CristianMovimiento : MonoBehaviour
             _atorado = true;
             _saltosNecesarios = 3;
             _saltosRealizados = 0;
-            StartCoroutine(StunCoroutine());
+            StartCoroutine(AtoradoCoroutine());
             Debug.Log("¡Estás aturdido! Salta 3 veces para liberarte");
         }
     }
 
-    private IEnumerator StunCoroutine()
+    private IEnumerator AtoradoCoroutine()
     {
         Color originalColor = _spriteRenderer.color;
         _spriteRenderer.color = Color.yellow;

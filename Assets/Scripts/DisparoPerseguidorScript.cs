@@ -3,37 +3,44 @@ using UnityEngine;
 public class DisparoPerseguidorScript : MonoBehaviour
 {
     private Transform objetivo;
-    private const float velocidad = 0.4f;
-    private const float tiempoVida = 0.4f ;
+    private const float Velocidad = 0.44f;
+    private const int TiempoVida = 5 ;
+    private const float Dano = 0.5f;
+    private CristianMovimiento _cristianScript;
+
+
 
     public void Iniciar(Transform jugador)
     {
         objetivo = jugador;
-        Destroy(gameObject, tiempoVida);
+        DestruirDisparo(TiempoVida);
     }
-
-    void Update()
+  private void DestruirDisparo(int TiempoVida)
+    {
+        Destroy(gameObject, TiempoVida);
+    }
+    private void Update()
     {
         if (objetivo == null) return;
-
+        MoverDisparo();
+        
+    }
+    private void MoverDisparo()
+    {
         Vector3 direccion = (objetivo.position - transform.position).normalized;
-        transform.position += direccion * velocidad * Time.deltaTime;
+        transform.position += direccion * Velocidad * Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Ground")) return; 
-
-        if (other.CompareTag("Player"))
+        if (collision.TryGetComponent(out _cristianScript))
         {
-            // Aplica daño
-            CristianMovimiento jugador = other.GetComponent<CristianMovimiento>();
-            if (jugador != null)
-            {
-                jugador.Golpe(0.5f); // o el daño que prefieras
-            }
-
-            Destroy(gameObject);
+            _cristianScript.Golpe(Dano);
+            DestruirDisparo(TiempoVida-TiempoVida);
+        }
+        else if (collision.CompareTag("Disparo"))
+        {
+            DestruirDisparo(TiempoVida-TiempoVida);
         }
     }
 }

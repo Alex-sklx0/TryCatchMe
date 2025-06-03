@@ -17,11 +17,15 @@ public class DisparoFuego : MonoBehaviour
             return _direccion;
         }
     }
-    void Update()
+    private void Update()
+    {
+        MoverDisparo();
+    }
+    private void MoverDisparo()
     {
         transform.position += Direccion * Velocidad * Time.deltaTime;
     }
-    public void DestruirDisparo()
+    private void DestruirDisparo()
     {
         Destroy(gameObject);
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class CrashtianScript : MonoBehaviour
+public class CrashtianScript : MonoBehaviour, IDanable
 {
     public GameObject estalactitaPrefab;
     public Transform[] puntosEstalactitas;
@@ -14,6 +14,7 @@ public class CrashtianScript : MonoBehaviour
     [SerializeField] private GameObject DisparoCodigoPrefab;
     [SerializeField] private Transform[] puntosChorro;
     [SerializeField] private GameObject indicadorPrefab;
+    [SerializeField] private GameObject _portalSiguienteNivel;
 
     public float intervaloEntreAtaques = 3f;
     private float _proximoAtaque;

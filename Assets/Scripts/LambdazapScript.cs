@@ -7,7 +7,7 @@ public class Lambdazap : MonoBehaviour, IDanable
     private const int anguloEntreRayos = 23; // Ángulo entre cada rayo
     private const float intervaloDisparo = 2; // Tiempo entre ráfagas
     private const int SaludMin = 0;
-    public const float RadioDeteccion = 0.35f;
+    public const float RadioDeteccion = 0.4f;
 
 
     private const float ConstanteEjeSprite = 1f; //constante para cuando se gira el srite en direccion y,z

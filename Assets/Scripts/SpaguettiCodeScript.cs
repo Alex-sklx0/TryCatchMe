@@ -8,13 +8,15 @@ enum TipoAtaque
     Espagueti,
     Queso
 }
-public class SpaghettiCode : MonoBehaviour, IDanable
+public class SpaghettiCode : MonoBehaviour, IDanable, IVerificadorTrace
 {
     //constantes
     private const float TiempoEntreAtaques = 1.8f;
     private const int RadioDeteccion = 8;
     private const string TagJugador = "Player";
-
+    private const int SaludMinima = 0;
+    private const int SaludMinimaPuzzle = 3;
+    
 
 
 
@@ -29,6 +31,7 @@ public class SpaghettiCode : MonoBehaviour, IDanable
     [SerializeField] private GameObject _espaguetiPrefab;
     [SerializeField] private GameObject _quesoPrefab;
     [SerializeField] private GameObject[] _traceOpciones; // los 3 traces en la escena
+    [SerializeField] private GameObject _portalSiguienteNivel;
 
     //variabels privadas
     private SpriteRenderer _spriteRenderer;
@@ -59,6 +62,7 @@ public class SpaghettiCode : MonoBehaviour, IDanable
     {
         foreach (GameObject trace in _traceOpciones)
             trace.SetActive(false);
+        _portalSiguienteNivel.SetActive(false); // Mostrar portal
 
     }
       private void IniciarAtaques()
@@ -197,12 +201,14 @@ private IEnumerator AtaqueQueso()
         if (idSeleccionado.Equals(_traceCorrectoIndex))
         {
             Debug.Log("¡Correcto! El jefe ha sido derrotado.");
+            foreach (GameObject trace in _traceOpciones)
+            trace.SetActive(false);
             MatarJefe();
         }
         else
         {
             Debug.Log("Incorrecto. El jefe recupera fuerza...");
-            _salud = Mathf.Min(_salud + 3, _saludMaxima); // recupera vida
+            _salud = Mathf.Min(_salud + SaludMinimaPuzzle, _saludMaxima); // recupera vida
             _modoPuzzleActivo = false;
             DesactivarTraces();
             IniciarAtaques();
@@ -220,7 +226,7 @@ private IEnumerator AtaqueQueso()
 
         _salud--;
 
-        if (_salud <= 3 && !_modoPuzzleActivo) // umbral para entrar en modo puzzle
+        if (_salud <= SaludMinimaPuzzle && !_modoPuzzleActivo) // umbral para entrar en modo puzzle
         {
             AsignarTraceCorrecto(1); // defines tú cuál es el correcto
             IniciarModoPuzzle();     // ← corregido aquí el nombre del método
@@ -228,7 +234,7 @@ private IEnumerator AtaqueQueso()
         }
 
 
-        if (_salud <= 0)
+        if (_salud <= SaludMinima)
         {
             MatarJefe();
         }
@@ -236,6 +242,8 @@ private IEnumerator AtaqueQueso()
     private void MatarJefe()
     {
         Debug.Log("El jefe ha sido destruido.");
+        if (_portalSiguienteNivel != null)
+        _portalSiguienteNivel.SetActive(true); // Mostrar portal
         Destroy(gameObject);
     }
 

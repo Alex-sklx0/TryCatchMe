@@ -1878,6 +1878,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &912614869
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 748629401835319918, guid: 17ae8480310b94f4eb4e5b34526e7a7f, type: 3}
+      propertyPath: m_Name
+      value: portalFinal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788955213977884879, guid: 17ae8480310b94f4eb4e5b34526e7a7f, type: 3}
+      propertyPath: nombreEscenaSiguiente
+      value: nivel2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881675533787154042, guid: 17ae8480310b94f4eb4e5b34526e7a7f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.948
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881675533787154042, guid: 17ae8480310b94f4eb4e5b34526e7a7f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.186
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881675533787154042, guid: 17ae8480310b94f4eb4e5b34526e7a7f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881675533787154042, guid: 17ae8480310b94f4eb4e5b34526e7a7f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881675533787154042, guid: 17ae8480310b94f4eb4e5b34526e7a7f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881675533787154042, guid: 17ae8480310b94f4eb4e5b34526e7a7f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881675533787154042, guid: 17ae8480310b94f4eb4e5b34526e7a7f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881675533787154042, guid: 17ae8480310b94f4eb4e5b34526e7a7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881675533787154042, guid: 17ae8480310b94f4eb4e5b34526e7a7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881675533787154042, guid: 17ae8480310b94f4eb4e5b34526e7a7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 17ae8480310b94f4eb4e5b34526e7a7f, type: 3}
 --- !u!1 &963400709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1965,6 +2026,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1008125302 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 748629401835319918, guid: 17ae8480310b94f4eb4e5b34526e7a7f, type: 3}
+  m_PrefabInstance: {fileID: 912614869}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1078726866
 GameObject:
   m_ObjectHideFlags: 0
@@ -2246,6 +2312,7 @@ MonoBehaviour:
   - {fileID: 1977904430}
   - {fileID: 1311895528}
   - {fileID: 1333413385}
+  _portalSiguienteNivel: {fileID: 1008125302}
 --- !u!50 &1163520630
 Rigidbody2D:
   serializedVersion: 5
@@ -2411,7 +2478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80a33ad1c70e37847b2ae7cc8ccd0dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jefe: {fileID: 1163520629}
+  jefeGenerico: {fileID: 1163520629}
 --- !u!58 &1311895532
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2700,7 +2767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80a33ad1c70e37847b2ae7cc8ccd0dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jefe: {fileID: 1163520629}
+  jefeGenerico: {fileID: 1163520629}
 --- !u!58 &1333413389
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3360,7 +3427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80a33ad1c70e37847b2ae7cc8ccd0dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jefe: {fileID: 1163520629}
+  jefeGenerico: {fileID: 1163520629}
 --- !u!58 &1977904434
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9045,3 +9112,4 @@ SceneRoots:
   - {fileID: 1163520628}
   - {fileID: 2073558202}
   - {fileID: 602487112}
+  - {fileID: 912614869}
