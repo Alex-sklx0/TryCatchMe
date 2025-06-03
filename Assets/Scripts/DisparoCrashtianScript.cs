@@ -2,56 +2,72 @@ using UnityEngine;
 
 public class DisparoCrashtianScript : MonoBehaviour
 {
-    public float velocidad = 5f;
-    public float duracionVida = 5f;
-    public float dano = 2f;
-    public AudioClip sonidoDisparo;
+    // Constantes
+    private const string TagJugador = "Player";
+    private const string TagCreador = "Crashtian";
+private const float velocidad = 0.3f;
+    private const float duracionVida = 5f;
+    private const float dano = 2f;
+    
+    // Serialized (editable desde el inspector)
+    [SerializeField] private AudioClip sonidoDisparo;
 
-    private Rigidbody2D _rigidbody2D;
+    // Variables privadas
+    private Rigidbody2D _rigidbody;
 
     private void Start()
     {
+        InicializarComponentes();
+        BuscarYDirigirAlJugador();
+        ReproducirSonidoDisparo();
+        ProgramarAutodestruccion();
+    }
 
-        
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+    private void InicializarComponentes()
+    {
+        _rigidbody = GetComponent<Rigidbody2D>();
+    }
 
-        // Buscar al jugador
-        GameObject cristianObj = GameObject.FindGameObjectWithTag("Player");
-        if (cristianObj != null)
-        {
-            Vector3 direccion = (cristianObj.transform.position - transform.position).normalized;
-            if (direccion.x >= 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            else transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+    private void BuscarYDirigirAlJugador()
+    {
+        GameObject jugador = GameObject.FindGameObjectWithTag(TagJugador);
+        if (jugador == null) return;
 
-            _rigidbody2D.linearVelocity = direccion * velocidad;
-            
-        }
+        Vector3 direccion = (jugador.transform.position - transform.position).normalized;
+        _rigidbody.linearVelocity = direccion * velocidad;
 
-        // Reproducir sonido
+        // Orientación visual del disparo
+        transform.localScale = new Vector3(
+            direccion.x >= 0f ? 1f : -1f,
+            1f,
+            1f
+        );
+    }
+
+    private void ReproducirSonidoDisparo()
+    {
         if (sonidoDisparo != null && Camera.main != null)
         {
-            AudioSource audioSource = Camera.main.GetComponent<AudioSource>();
-            if (audioSource != null)
+            AudioSource audio = Camera.main.GetComponent<AudioSource>();
+            if (audio != null)
             {
-                audioSource.PlayOneShot(sonidoDisparo);
+                audio.PlayOneShot(sonidoDisparo);
             }
         }
+    }
 
-        // Autodestrucción después de cierto tiempo
+    private void ProgramarAutodestruccion()
+    {
         Destroy(gameObject, duracionVida);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Ignora al jefe (tag opcional)
-        if (other.CompareTag("Crashtian") )
-            return;
+        if (other.CompareTag(TagCreador)) return;
 
-        // Daño a Cristian si lo golpea
-        CristianMovimiento cristian = other.GetComponent<CristianMovimiento>();
-        if (cristian != null)
+        if (other.CompareTag(TagJugador))
         {
-            cristian.Golpe(dano);
+            other.GetComponent<CristianMovimiento>()?.Golpe(dano);
         }
 
         Destroy(gameObject);

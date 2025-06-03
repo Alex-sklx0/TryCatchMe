@@ -1,16 +1,29 @@
 using UnityEngine;
 
-public class EstalactitaScript : MonoBehaviour
+public class Estalactita : MonoBehaviour
 {
-    private Rigidbody2D _rb;
-    private float _dano = 1.5f;
+    // Constantes
+    private const float GravedadInicial = 0f;
+    private const float GravedadActiva = 0.3f;
+    private const float Dano = 1.5f;
+    private const string TagJugador = "Player";
+    private const string TagSuelo = "Ground";
 
-    void Awake()
+    // Variables privadas
+    private Rigidbody2D _rigidbody;
+
+    private void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _rb.gravityScale = 0f; // Empieza suspendida
+        InicializarEstalactita();
     }
 
+    private void InicializarEstalactita()
+    {
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody.gravityScale = GravedadInicial; // Suspende al inicio
+    }
+
+   
     public void CaerLuegoDe(float segundos)
     {
         Invoke(nameof(ActivarCaida), segundos);
@@ -18,19 +31,24 @@ public class EstalactitaScript : MonoBehaviour
 
     private void ActivarCaida()
     {
-        _rb.gravityScale = 0.3f; // Activa gravedad para que caiga
+        _rigidbody.gravityScale = GravedadActiva;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(TagJugador))
         {
-            other.GetComponent<CristianMovimiento>()?.Golpe(_dano);
-            Destroy(gameObject);
+            other.GetComponent<CristianMovimiento>()?.Golpe(Dano);
+            DestruirEstalactita();
         }
-        else if (other.CompareTag("Ground"))
+        else if (other.CompareTag(TagSuelo))
         {
-            Destroy(gameObject);
+            DestruirEstalactita();
         }
+    }
+
+    private void DestruirEstalactita()
+    {
+        Destroy(gameObject);
     }
 }

@@ -10,7 +10,7 @@ public class DisparoAlbondiga : MonoBehaviour
     private const string TagSuelo = "Ground";
 
     //variables privadas
-    private Rigidbody2D _rb;
+    private Rigidbody2D _rigidbody2D;
 
     void Start()
     {
@@ -19,8 +19,8 @@ public class DisparoAlbondiga : MonoBehaviour
     }
       public void ObtenerComponentes()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _rb.gravityScale = EscalaGravedadReducida; // se modifica la gravedad para que caiga mas lento    }
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D.gravityScale = EscalaGravedadReducida; // se modifica la gravedad para que caiga mas lento    }
     }
     private void Autodestruir()
     {
@@ -33,8 +33,8 @@ public class DisparoAlbondiga : MonoBehaviour
     }
     private void RedirigirDisparo(Vector2 direccion, float fuerza)
     {
-        _rb = _rb != null ? _rb : GetComponent<Rigidbody2D>();
-        _rb.AddForce(direccion.normalized * fuerza, ForceMode2D.Impulse);
+        _rigidbody2D = _rigidbody2D != null ? _rigidbody2D : GetComponent<Rigidbody2D>();
+        _rigidbody2D.AddForce(direccion.normalized * fuerza, ForceMode2D.Impulse);
     }
     // Se llama desde el jefe con dirección ajustada hacia el jugador
 

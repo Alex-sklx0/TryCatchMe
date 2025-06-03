@@ -3,127 +3,230 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class CrashtianScript : MonoBehaviour, IDanable
+public class CrashtianScript : MonoBehaviour, IDanable, IVerificadorTrace
 {
-    public GameObject estalactitaPrefab;
-    public Transform[] puntosEstalactitas;
+    // --- ENUM DE ATAQUES ---
+    private enum TipoAtaque
+    {
+        Estalactitas = 0,
+        DisparoGrande = 1,
+        Chorros = 2
+    }
 
-    public GameObject disparoGrandePrefab;
-    public Transform puntoDisparo;
+    // --- CONSTANTES ---
+    private const float TiempoEntreAtaques = 3f;
+    private const float TiempoAviso = 1f;
+    private const int UmbralVidaPuzzle = 3;
+    private const int SaludMinima = 0;
 
-    [SerializeField] private GameObject DisparoCodigoPrefab;
+    // --- SERIALIZED ---
+    [Header("Ataques")]
+    [SerializeField] private GameObject estalactitaPrefab;
+    [SerializeField] private Transform[] puntosEstalactitas;
+
+    [SerializeField] private GameObject disparoGrandePrefab;
+    [SerializeField] private Transform puntoDisparo;
+
+    [SerializeField] private GameObject chorroPrefab;
     [SerializeField] private Transform[] puntosChorro;
     [SerializeField] private GameObject indicadorPrefab;
-    [SerializeField] private GameObject _portalSiguienteNivel;
 
-    public float intervaloEntreAtaques = 3f;
+    [Header("Traces y Portal")]
+    [SerializeField] private GameObject[] traceOpciones;
+    [SerializeField] private GameObject portalSiguienteNivel;
+
+    // --- PRIVADAS ---
+    private GameObject _jugador;
     private float _proximoAtaque;
-    private float _salud = 30f;
+    private int _salud = 10;
+    private int _saludMaxima ;
+    private bool _modoPuzzleActivo = false;
+    private string _traceCorrectoIndex = "1";
+    private Coroutine _rutinaAtaque;
+
+    // --- UNITY EVENTS ---
+    private void Start()
+    {
+        _saludMaxima = _salud;
+        _jugador = GameObject.FindGameObjectWithTag("Player");
+        DesactivarTraces();
+        IniciarAtaques();
+    }
 
     private void Update()
     {
-        GameObject cristianObj = GameObject.FindGameObjectWithTag("Player");
-        if (cristianObj != null)
+        if (_jugador != null)
         {
-            Vector3 direccion = (cristianObj.transform.position - transform.position).normalized;
-            if (direccion.x >= 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            else transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-        }
-
-        if (Time.time >= _proximoAtaque)
-        {
-            ElegirYRealizarAtaque();
-            _proximoAtaque = Time.time + intervaloEntreAtaques;
+            Vector3 direccion = (_jugador.transform.position - transform.position).normalized;
+            transform.localScale = new Vector3(direccion.x >= 0 ? 1f : -1f, 1f, 1f);
         }
     }
 
-    private void ElegirYRealizarAtaque()
+    // --- ATAQUES ---
+    private void IniciarAtaques()
     {
-        int ataque = Random.Range(0, 3); // 0 = estalactitas, 1 = disparo grande, 2 = chorros
+        if (_rutinaAtaque == null)
+            _rutinaAtaque = StartCoroutine(CicloDeAtaque());
+    }
 
+    private void DetenerAtaques()
+    {
+        if (_rutinaAtaque != null)
+        {
+            StopCoroutine(_rutinaAtaque);
+            _rutinaAtaque = null;
+        }
+    }
+
+    private IEnumerator CicloDeAtaque()
+    {
+        while (!_modoPuzzleActivo)
+        {
+            if (Time.time >= _proximoAtaque)
+            {
+                EjecutarAtaqueAleatorio();
+                _proximoAtaque = Time.time + TiempoEntreAtaques;
+            }
+            yield return null;
+        }
+    }
+
+    private void EjecutarAtaqueAleatorio()
+    {
+        TipoAtaque ataque = (TipoAtaque)Random.Range(0, 3);
         switch (ataque)
         {
-            case 0:
-                StartCoroutine(AtaqueEstalactitas()); // ✅ ahora sí es una corutina
+            case TipoAtaque.Estalactitas:
+                StartCoroutine(AtaqueEstalactitas());
                 break;
-            case 1:
+            case TipoAtaque.DisparoGrande:
                 AtaqueDisparoGrande();
                 break;
-            case 2:
+            case TipoAtaque.Chorros:
                 StartCoroutine(LanzarChorroDesdeSuelo());
                 break;
         }
     }
 
-    // ✅ ATAQUE 1: ESTALACTITAS (cambiado de void a IEnumerator)
     private IEnumerator AtaqueEstalactitas()
     {
-        List<int> indices = new List<int> { 0, 1, 2, 3, 4 };
-        indices = indices.OrderBy(x => Random.value).ToList();
+        List<int> orden = Enumerable.Range(0, puntosEstalactitas.Length)
+                                    .OrderBy(_ => Random.value)
+                                    .ToList();
 
-        yield return StartCoroutine(LanzarEstalactitasEnOrden(indices));
-    }
-
-   private IEnumerator LanzarEstalactitasEnOrden(List<int> orden)
-{
-    foreach (int i in orden)
-    {
-        Transform punto = puntosEstalactitas[i];
-
-        //  Instancia con rotación de 180 grados en Z
-        GameObject estalactita = Instantiate(estalactitaPrefab, punto.position, Quaternion.Euler(0, 0, 180f));
-
-        //  Activar caída después de 1.2 segundos
-        estalactita.GetComponent<EstalactitaScript>()?.CaerLuegoDe(1.2f);
-
-        yield return new WaitForSeconds(Random.Range(0.2f, 0.5f));
-    }
-}
-
-
-    // ATAQUE 2: DISPARO GRANDE
-    private void AtaqueDisparoGrande()
-    {
-        GameObject disparo = Instantiate(disparoGrandePrefab, puntoDisparo.position, Quaternion.identity);
-        Rigidbody2D rb = disparo.GetComponent<Rigidbody2D>();
-    }
-
-    // ATAQUE 3: CHORRO DE CÓDIGO DESDE EL SUELO
-    private IEnumerator LanzarChorroDesdeSuelo()
-{
-    foreach (Transform punto in puntosChorro)
-    {
-        // 👇 Muestra alerta antes de iniciar los 5 chorros
-        yield return StartCoroutine(MostrarIndicadorYEjecutar(punto));
-    }
-}
-    private IEnumerator MostrarIndicadorYEjecutar(Transform punto)
-    {
-        GameObject indicador = Instantiate(indicadorPrefab, punto.position, Quaternion.identity);
-
-        yield return new WaitForSeconds(1f); // Tiempo para que el jugador vea la alerta
-
-        Destroy(indicador);
-
-        for (int i = 1; i < 6; i++) // 5 disparos por punto
+        foreach (int i in orden)
         {
-            GameObject chorro = Instantiate(DisparoCodigoPrefab, punto.position, Quaternion.identity);
-
-            float angulo = i * 30f;
-            float fuerza = 1.3f;
-
-            float rad = angulo * Mathf.Deg2Rad;
-            Vector2 direccion = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
-
-            chorro.GetComponent<ChorroDisparoScript>()?.Inicializar(direccion, fuerza);
-
-            yield return new WaitForSeconds(0.2f); // Espera entre disparos
+            var punto = puntosEstalactitas[i];
+            GameObject estalactita = Instantiate(estalactitaPrefab, punto.position, Quaternion.Euler(0, 0, 180f));
+            estalactita.GetComponent<Estalactita>()?.CaerLuegoDe(1.2f);
+            yield return new WaitForSeconds(Random.Range(0.2f, 0.5f));
         }
     }
-  public void Golpe()
+
+    private void AtaqueDisparoGrande()
     {
-        _salud --;
-        if (_salud <= 0) Destroy(gameObject);
+        Instantiate(disparoGrandePrefab, puntoDisparo.position, Quaternion.identity);
     }
 
+    private IEnumerator LanzarChorroDesdeSuelo()
+    {
+        foreach (Transform punto in puntosChorro)
+        {
+            yield return StartCoroutine(MostrarIndicadorYEjecutarChorros(punto));
+        }
+    }
+
+    private IEnumerator MostrarIndicadorYEjecutarChorros(Transform punto)
+    {
+        if (indicadorPrefab != null)
+            Destroy(Instantiate(indicadorPrefab, punto.position, Quaternion.identity), TiempoAviso);
+
+        yield return new WaitForSeconds(TiempoAviso);
+
+        for (int i = 1; i <= 5; i++)
+        {
+            GameObject chorro = Instantiate(chorroPrefab, punto.position, Quaternion.identity);
+            float angulo = i * 30f;
+            float rad = angulo * Mathf.Deg2Rad;
+            Vector2 direccion = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+            chorro.GetComponent<ChorroDisparo>()?.Inicializar(direccion, 1.3f);
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
+    // --- VIDA / TRACES ---
+    public void Golpe()
+    {
+        RecibirDano();
+    }
+
+    private void RecibirDano()
+    {
+        if (_modoPuzzleActivo) return;
+
+        _salud--;
+
+        if (_salud <= UmbralVidaPuzzle && !_modoPuzzleActivo)
+        {
+            IniciarModoPuzzle();
+            AsignarTraceCorrecto(1); // config predeterminada
+            return;
+        }
+
+        if (_salud <= SaludMinima)
+        {
+            MatarJefe();
+        }
+    }
+
+    private void IniciarModoPuzzle()
+    {
+        _modoPuzzleActivo = true;
+        DetenerAtaques();
+
+        foreach (var trace in traceOpciones)
+            trace.SetActive(true);
+    }
+
+    private void DesactivarTraces()
+    {
+        foreach (var trace in traceOpciones)
+            trace.SetActive(false);
+
+        if (portalSiguienteNivel != null)
+            portalSiguienteNivel.SetActive(false);
+    }
+
+    public void VerificarTrace(string idSeleccionado)
+    {
+        if (!_modoPuzzleActivo) return;
+
+        if (idSeleccionado == _traceCorrectoIndex)
+        {
+            Debug.Log("¡Correcto! Jefe derrotado.");
+            MatarJefe();
+        }
+        else
+        {
+            Debug.Log("Incorrecto. El jefe recupera vida.");
+            _salud = Mathf.Min(_salud + 3, _saludMaxima);
+            _modoPuzzleActivo = false;
+            DesactivarTraces();
+            IniciarAtaques();
+        }
+    }
+
+    public void AsignarTraceCorrecto(int index)
+    {
+        _traceCorrectoIndex = index.ToString();
+    }
+
+    private void MatarJefe()
+    {
+        Debug.Log("Jefe eliminado.");
+        if (portalSiguienteNivel != null)
+            portalSiguienteNivel.SetActive(true);
+
+        Destroy(gameObject);
+    }
 }

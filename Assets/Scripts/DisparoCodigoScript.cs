@@ -1,36 +1,73 @@
 using UnityEngine;
 
-public class ChorroDisparoScript : MonoBehaviour
+public class ChorroDisparo : MonoBehaviour
 {
-    private Rigidbody2D _rb;
-    private float _dano = 1f;
-    private float _tiempoVida = 4f;
+    // ─────────────────────────────────────────────
+    // Constantes
+    private const float Dano = 1f;
+    private const float TiempoVida = 4f;
+    private const float Gravedad = 0.3f;
+    private const string TagJugador = "Player";
+    private const string TagSuelo = "Ground";
+    private const string TagIgnorar = "DisparoCrashtian";
 
+    // ─────────────────────────────────────────────
+    // Variables privadas
+    private Rigidbody2D _rigidbody2D;
+
+    // ─────────────────────────────────────────────
     private void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _rb.gravityScale = 0.3f; // Aplica gravedad para que caiga como proyectil
-        Destroy(gameObject, _tiempoVida);
+        InicializarFisica();
+        AutodestruirDespuesDeTiempo();
+    }
+
+    private void InicializarFisica()
+    {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        if (_rigidbody2D != null)
+        {
+            _rigidbody2D.gravityScale = Gravedad;
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró Rigidbody2D en el objeto.");
+        }
+    }
+
+    private void AutodestruirDespuesDeTiempo()
+    {
+        Destroy(gameObject, TiempoVida);
     }
 
     public void Inicializar(Vector2 direccion, float fuerza)
     {
-        _rb = _rb != null ? _rb : GetComponent<Rigidbody2D>();
-        _rb.AddForce(direccion.normalized * fuerza, ForceMode2D.Impulse);
+        if (_rigidbody2D == null)
+            _rigidbody2D = GetComponent<Rigidbody2D>();
+
+        if (_rigidbody2D != null)
+        {
+            _rigidbody2D.AddForce(direccion.normalized * fuerza, ForceMode2D.Impulse);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-         if (other.CompareTag("DisparoCrashtian")) return; // <-- Ignora al propio disparo 
+        if (other.CompareTag(TagIgnorar)) return;
 
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(TagJugador))
         {
-            other.GetComponent<CristianMovimiento>()?.Golpe(_dano);
-            Destroy(gameObject);
+            other.GetComponent<CristianMovimiento>()?.Golpe(Dano);
+            DestruirDisparo();
         }
-        else if (other.CompareTag("Ground"))
+        else if (other.CompareTag(TagSuelo))
         {
-            Destroy(gameObject);
+            DestruirDisparo();
         }
+    }
+
+    private void DestruirDisparo()
+    {
+        Destroy(gameObject);
     }
 }
